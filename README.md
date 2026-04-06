@@ -46,79 +46,20 @@
 
 ## 快速开始
 
-### 1. 克隆本仓库
-
 ```bash
 git clone https://github.com/yumengzou223/OpenManus-Deploy.git
 cd OpenManus-Deploy
-```
-
-### 2. 配置 API Key
-
-```bash
 cp config/config.example.toml config/config.toml
 # 编辑 config.toml，填入你的 API Key
-```
-
-推荐使用 DeepSeek API（性价比高）：
-
-```toml
-[llm]
-model = "deepseek-chat"
-base_url = "https://api.deepseek.com/v1"
-api_key = "your-deepseek-api-key"
-```
-
-### 3. 安装依赖并运行
-
-```bash
 pip install -r requirements.txt
 python main.py
 ```
-
-### 4. 可选：启用浏览器自动化
-
-```bash
-playwright install
-```
-
-## 项目结构
-
-```
-OpenManus-Deploy/
-├── app/
-│   ├── agent/          # Agent 核心（Manus / ToolCallAgent / ReActAgent）
-│   ├── tool/           # 工具实现（浏览器/文件/Python/爬虫/搜索）
-│   ├── prompt/         # Prompt 模板
-│   ├── llm.py          # LLM 调用封装
-│   └── config.py       # 配置管理
-├── config/             # 配置文件
-├── main.py             # 入口
-└── run_flow.py         # 多 Agent 工作流（可选）
-```
-
-## 主要工具一览
-
-| 工具名 | 功能 |
-|--------|------|
-| python_execute | 安全执行 Python 代码 |
-| browser_use_tool | 浏览器自动化操作 |
-| str_replace_editor | 文件查看 / 创建 / 编辑 |
-| news_scraper | Bing News 关键词新闻采集 |
-| web_search | 多引擎网页搜索 |
-| crawl4ai | AI 驱动的网页内容抓取 |
-| Terminate | 结束任务 |
 
 ## 致谢
 
 - 感谢 [FoundationAgents/OpenManus](https://github.com/FoundationAgents/OpenManus) 团队提供开源的 Agent 框架
 - 感谢 [MetaGPT](https://github.com/geekan/MetaGPT) 社区的贡献
-- 感谢 [Anthropic](https://www.anthropic.com) 的 Claude 系列模型支持
 
 ## License
 
 MIT License - 继承自 OpenManus 原始项目许可
-
----
-
-*本项目仅供学习与研究使用，如需商业应用请参考原始 OpenManus 项目许可。*
