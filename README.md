@@ -1,1 +1,124 @@
-IyBPcGVuTWFudXMtRGVwbG95Cgo+IOWfuuS6jiBbRm91bmRhdGlvbkFnZW50cy9PcGVuTWFudXNdKGh0dHBzOi8vZ2l0aHViLmNvbS9Gb3VuZGF0aW9uQWdlbnRzL09wZW5NYW51cykg5byA5rqQ6aG555uu5a6a5Yi25byA5Y+R55qEIEFJIOS/oeaBr+mHh+mbhuS4juiHquWKqOWMluW3peWFt+ermeeCueOAggoKIyMg6aG555uu6LW35rqQCgrmnKzpobnnm67ln7rkuo4gTWV0YUdQVCDlm6LpmJ/lvIDlj5HnmoQgW09wZW5NYW51c10oaHR0cHM6Ly9naXRodWIuY29tL0ZvdW5kYXRpb25BZ2VudHMvT3Blbk1hbnVzKe+8iE1JVCBMaWNlbnNl77yJ5byA5rqQ6aG555uu6L+b6KGM5a6a5Yi25byA5Y+R44CCT3Blbk1hbnVzIOaYr+S4gOS4qumAmueUqOeahCBBSSBBZ2VudCDmoYbmnrbvvIzog73lpJ/lnKggMyDlsI/ml7blhoXlrozmiJDmnoTlu7rlubbmjIHnu63ov63ku6PvvIzmlK/mjIHmtY/op4jlmajoh6rliqjljJbjgIHmlofku7bmk43kvZzjgIHku6PnoIHmiafooYznrYnlpJrnp43lt6XlhbfosIPnlKjog73lipvjgIIKCiMjIOacrOmhueebruaUuei/m+WGheWuuQoK5Zyo5Y6f5aeLIE9wZW5NYW51cyDmoYbmnrbln7rnoYDkuIrvvIzmnKzpobnnm67ov5vooYzkuobku6XkuIvlrprliLbljJblvIDlj5HvvJoKCiMjIyAxLiDlrprliLblt6Xlhbfpk77vvJrkv6Hmga/ph4fpm4bkuI7niKzlj5YKCi0gKirniKzomavlt6Xlhbfpm4bmiJAqKu+8muWfuuS6jiBodHRweCArIEJlYXV0aWZ1bFNvdXAg5bCB6KOF5LqG5paw6Ze76YeH6ZuG5bel5YW377yITmV3c1NjcmFwZXJUb29s77yJ77yM5pSv5oyBIEJpbmcgTmV3cyDmkJzntKLvvIzlj6/mjInlhbPplK7or43mipPlj5bmnIDmlrDotYTorq/jgIHmkZjopoHkuI7mnaXmupDpk77mjqUKLSAqKuaQnOe0ouW3peWFt+aJqeWxlSoq77ya6ZuG5oiQ5aSa5pCc57Si5byV5pOO77yIR29vZ2xlIC8gRHVja0R1Y2tHbyAvIEJhaWR1IC8gQmluZ++8ieeahOe9kemhteaQnOe0ouiDveWKm++8jOaUr+aMgeiHquWKqOmZjee6p+S4juWkmuivreiogOe7k+aenAoKIyMjIDIuIFByb21wdCDlt6XnqIvkvJjljJYKCi0g6ZKI5a+55L+h5oGv6YeH6ZuG5Zy65pmv5LyY5YyWIEFnZW50IOaPkOekuuivje+8jOaPkOWNh+S7u+WKoeaLhuino+iDveWKmwotIOiuvuiuoeaEj+WbvuWIhuexuyBQcm9tcHTvvIzlvJXlr7wgQWdlbnQg6Ieq5Li76YCJ5oup5ZCI6YCC55qE5bel5YW357uE5ZCICi0g5Yqo5oCB5rOo5YWl5rWP6KeI5Zmo5LiK5LiL5paH77yM5aKe5by65aSa6L2u5a+56K+d54q25oCB5oSf55+lCgojIyMgMy4g5Lqk5LqS5o6l5Y+j5LiO572R56uZ6YOo572yCgotIOaOpeWFpSBEZWVwU2VlayBDaGF0IEFQSSDkvZzkuLrlkI7nq6/lpKfmqKHlnovvvIzpmY3kvY7pg6jnvbLmiJDmnKwKLSDln7rkuo4gT3Blbk1hbnVzIEFnZW50IOaehOW7uiBBSSDkv6Hmga/ph4fpm4blt6XlhbfnvZHnq5nvvIznlKjmiLfovpPlhaXlhbPplK7or43ljbPlj6/oh6rliqjlrozmiJDvvJrmkJzntKIg4oaSIOaKk+WPliDihpIg5pW055CG5YWo5rWB56iLCi0g5pSv5oyB5a6e5pe25Lu75Yqh54q25oCB5bGV56S65LiO57uT5p6c5a+85Ye6CgojIyMgNC4g546v5aKD6YWN572u5LiO5bel56iL5YyWCgotIOWujOWWhCBjb25maWcudG9tbCDphY3nva7nrqHnkIbvvIzmlK/mjIHlpJrmqKHlnovliIfmjaLvvIhEZWVwU2VlayAvIEdQVC00byAvIENsYXVkZSDnrYnvvIkKLSBEb2NrZXIg5YyW6YOo572y5pSv5oyB77yM5byA566x5Y2z55SoCi0g5a6M5pW05pel5b+X6K6w5b2V77yM5L6/5LqO6Zeu6aKY5o6S5p+l5LiO5pWI5p6c5YiG5p6QCgojIyDmioDmnK/moIgKCnwg57G75YirIHwg5oqA5pyvIHwKfC0tLS0tLXwtLS0tLS18CnwgQWdlbnQg5qGG5p62IHwgT3Blbk1hbnVz77yI5Z+65LqOIE1ldGFHUFTvvIkgfAp8IOWQjuerr+aooeWeiyB8IERlZXBTZWVrIENoYXQgLyBHUFQtNG8gLyBDbGF1ZGUgfAp8IOa1j+iniOWZqOiHquWKqOWMliB8IFBsYXl3cmlnaHTvvIhDRFAg5Y2P6K6u77yJIHwKfCDnvZHpobXniKzlj5YgfCBodHRweCArIEJlYXV0aWZ1bFNvdXAgfAp8IOW8guatpeahhuaetiB8IGFzeW5jaW8gfAp8IOmDqOe9siB8IERvY2tlciAvIFB5dGhvbiAzLjEyIHwKCiMjIOW/q+mAn+W8gOWniwoKIyMjIDEuIOWFi+mahuacrOS7k+W6kwoKYGBgYmFzaApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL3l1bWVuZ3pvdTIyMy9PcGVuTWFudXMtRGVwbG95LmdpdApjZCBPcGVuTWFudXMtRGVwbG95CmBgYAoKIyMjIDIuIOmFjee9riBBUEkgS2V5CgpgYGBiYXNoCmNwIGNvbmZpZy9jb25maWcuZXhhbXBsZS50b21sIGNvbmZpZy9jb25maWcudG9tbAojIOe8lui+kSBjb25maWcudG9tbO+8jOWhq+WFpeS9oOeahCBBUEkgS2V5CmBgYAoK5o6o6I2Q5L2/55SoIERlZXBTZWVrIEFQSe+8iOaAp+S7t+avlOmrmO+8ie+8mgoKYGBgdG9tbApbbGxtXQptb2RlbCA9ICJkZWVwc2Vlay1jaGF0IgpiYXNlX3VybCA9ICJodHRwczovL2FwaS5kZWVwc2Vlay5jb20vdjEiCmFwaV9rZXkgPSAieW91ci1kZWVwc2Vlay1hcGkta2V5IgpgYGAKCiMjIyAzLiDlronoo4Xkvp3otZblubbov5DooYwKCmBgYGJhc2gKcGlwIGluc3RhbGwgLXIgcmVxdWlyZW1lbnRzLnR4dApweXRob24gbWFpbi5weQpgYGAKCiMjIyA0LiDlj6/pgInvvJrlkK/nlKjmtY/op4jlmajoh6rliqjljJYKCmBgYGJhc2gKcGxheXdyaWdodCBpbnN0YWxsCmBgYAoKIyMg6aG555uu57uT5p6ECgpgYGAKT3Blbk1hbnVzLURlcGxveS8K4pSc4pSA4pSAIGFwcC8K4pSCICAg4pSc4pSA4pSAIGFnZW50LyAgICAgICAgICAjIEFnZW50IOaguOW/g++8iE1hbnVzIC8gVG9vbENhbGxBZ2VudCAvIFJlQWN0QWdlbnTvvIkK4pSCICAg4pSc4pSA4pSAIHRvb2wvICAgICAgICAgICAjIOW3peWFt+WunueOsO+8iOa1j+iniOWZqC/mlofku7YvUHl0aG9uL+eIrOiZqy/mkJzntKLvvIkK4pSCICAg4pSc4pSA4pSAIHByb21wdC8gICAgICAgICAjIFByb21wdCDmqKHmnb8K4pSCICAg4pSc4pSA4pSAIGxsbS5weSAgICAgICAgICAjIExMTSDosIPnlKjlsIHoo4UK4pSCICAg4pSU4pSA4pSAIGNvbmZpZy5weSAgICAgICAjIOmFjee9rueuoeeQhgrilJzilIDilIAgY29uZmlnLyAgICAgICAgICAgICAjIOmFjee9ruaWh+S7tgrilJzilIDilIAgbWFpbi5weSAgICAgICAgICAgICAjIOWFpeWPowrilJTilIDilIAgcnVuX2Zsb3cucHkgICAgICAgICAjIOWkmiBBZ2VudCDlt6XkvZzmtYHvvIjlj6/pgInvvIkKYGBgCgojIyDkuLvopoHlt6XlhbfkuIDop4gKCnwg5bel5YW35ZCNIHwg5Yqf6IO9IHwKfC0tLS0tLS0tfC0tLS0tLXwKfCBweXRob25fZXhlY3V0ZSB8IOWuieWFqOaJp+ihjCBQeXRob24g5Luj56CBIHwKfCBicm93c2VyX3VzZV90b29sIHwg5rWP6KeI5Zmo6Ieq5Yqo5YyW5pON5L2cIHwKfCBzdHJfcmVwbGFjZV9lZGl0b3IgfCDmlofku7bmn6XnnIsgLyDliJvlu7ogLyDnvJbovpEgfAp8IG5ld3Nfc2NyYXBlciB8IEJpbmcgTmV3cyDlhbPplK7or43mlrDpl7vph4fpm4YgfAp8IHdlYl9zZWFyY2ggfCDlpJrlvJXmk47nvZHpobXmkJzntKIgfAp8IGNyYXdsNGFpIHwgQUkg6amx5Yqo55qE572R6aG15YaF5a655oqT5Y+WIHwKfCBUZXJtaW5hdGUgfCDnu5PmnZ/ku7vliqEgfAoKIyMg6Ie06LCiCgotIOaEn+iwoiBbRm91bmRhdGlvbkFnZW50cy9PcGVuTWFudXNdKGh0dHBzOi8vZ2l0aHViLmNvbS9Gb3VuZGF0aW9uQWdlbnRzL09wZW5NYW51cykg5Zui6Zif5o+Q5L6b5byA5rqQ55qEIEFnZW50IOahhuaetgotIOaEn+iwoiBbTWV0YUdQVF0oaHR0cHM6Ly9naXRodWIuY29tL2dlZWthbi9NZXRhR1BUKSDnpL7ljLrnmoTotKHnjK4KLSDmhJ/osKIgW0FudGhyb3BpY10oaHR0cHM6Ly93d3cuYW50aHJvcGljLmNvbSkg55qEIENsYXVkZSDns7vliJfmqKHlnovmlK/mjIEKCiMjIExpY2Vuc2UKCk1JVCBMaWNlbnNlIC0g57un5om/6IeqIE9wZW5NYW51cyDljp/lp4vpobnnm67orrjlj68KCi0tLQoKKuacrOmhueebruS7heS+m+WtpuS5oOS4jueglOeptuS9v+eUqO+8jOWmgumcgOWVhuS4muW6lOeUqOivt+WPguiAg+WOn+WniyBPcGVuTWFudXMg6aG555uu6K645Y+v44CCKgo=
+# OpenManus-Deploy
+
+> 基于 [FoundationAgents/OpenManus](https://github.com/FoundationAgents/OpenManus) 开源项目定制开发的 AI 信息采集与自动化工具站点。
+
+## 项目起源
+
+本项目基于 MetaGPT 团队开发的 [OpenManus](https://github.com/FoundationAgents/OpenManus)（MIT License）开源项目进行定制开发。OpenManus 是一个通用的 AI Agent 框架，能够在 3 小时内完成构建并持续迭代，支持浏览器自动化、文件操作、代码执行等多种工具调用能力。
+
+## 本项目改进内容
+
+在原始 OpenManus 框架基础上，本项目进行了以下定制化开发：
+
+### 1. 定制工具链：信息采集与爬取
+
+- **爬虫工具集成**：基于 httpx + BeautifulSoup 封装了新闻采集工具（NewsScraperTool），支持 Bing News 搜索，可按关键词抓取最新资讯、摘要与来源链接
+- **搜索工具扩展**：集成多搜索引擎（Google / DuckDuckGo / Baidu / Bing）的网页搜索能力，支持自动降级与多语言结果
+
+### 2. Prompt 工程优化
+
+- 针对信息采集场景优化 Agent 提示词，提升任务拆解能力
+- 设计意图分类 Prompt，引导 Agent 自主选择合适的工具组合
+- 动态注入浏览器上下文，增强多轮对话状态感知
+
+### 3. 交互接口与网站部署
+
+- 接入 DeepSeek Chat API 作为后端大模型，降低部署成本
+- 基于 OpenManus Agent 构建 AI 信息采集工具网站，用户输入关键词即可自动完成：搜索 → 抓取 → 整理全流程
+- 支持实时任务状态展示与结果导出
+
+### 4. 环境配置与工程化
+
+- 完善 config.toml 配置管理，支持多模型切换（DeepSeek / GPT-4o / Claude 等）
+- Docker 化部署支持，开箱即用
+- 完整日志记录，便于问题排查与效果分析
+
+## 技术栈
+
+| 类别 | 技术 |
+|------|------|
+| Agent 框架 | OpenManus（基于 MetaGPT） |
+| 后端模型 | DeepSeek Chat / GPT-4o / Claude |
+| 浏览器自动化 | Playwright（CDP 协议） |
+| 网页爬取 | httpx + BeautifulSoup |
+| 异步框架 | asyncio |
+| 部署 | Docker / Python 3.12 |
+
+## 快速开始
+
+### 1. 克隆本仓库
+
+```bash
+git clone https://github.com/yumengzou223/OpenManus-Deploy.git
+cd OpenManus-Deploy
+```
+
+### 2. 配置 API Key
+
+```bash
+cp config/config.example.toml config/config.toml
+# 编辑 config.toml，填入你的 API Key
+```
+
+推荐使用 DeepSeek API（性价比高）：
+
+```toml
+[llm]
+model = "deepseek-chat"
+base_url = "https://api.deepseek.com/v1"
+api_key = "your-deepseek-api-key"
+```
+
+### 3. 安装依赖并运行
+
+```bash
+pip install -r requirements.txt
+python main.py
+```
+
+### 4. 可选：启用浏览器自动化
+
+```bash
+playwright install
+```
+
+## 项目结构
+
+```
+OpenManus-Deploy/
+├── app/
+│   ├── agent/          # Agent 核心（Manus / ToolCallAgent / ReActAgent）
+│   ├── tool/           # 工具实现（浏览器/文件/Python/爬虫/搜索）
+│   ├── prompt/         # Prompt 模板
+│   ├── llm.py          # LLM 调用封装
+│   └── config.py       # 配置管理
+├── config/             # 配置文件
+├── main.py             # 入口
+└── run_flow.py         # 多 Agent 工作流（可选）
+```
+
+## 主要工具一览
+
+| 工具名 | 功能 |
+|--------|------|
+| python_execute | 安全执行 Python 代码 |
+| browser_use_tool | 浏览器自动化操作 |
+| str_replace_editor | 文件查看 / 创建 / 编辑 |
+| news_scraper | Bing News 关键词新闻采集 |
+| web_search | 多引擎网页搜索 |
+| crawl4ai | AI 驱动的网页内容抓取 |
+| Terminate | 结束任务 |
+
+## 致谢
+
+- 感谢 [FoundationAgents/OpenManus](https://github.com/FoundationAgents/OpenManus) 团队提供开源的 Agent 框架
+- 感谢 [MetaGPT](https://github.com/geekan/MetaGPT) 社区的贡献
+- 感谢 [Anthropic](https://www.anthropic.com) 的 Claude 系列模型支持
+
+## License
+
+MIT License - 继承自 OpenManus 原始项目许可
+
+---
+
+*本项目仅供学习与研究使用，如需商业应用请参考原始 OpenManus 项目许可。*
