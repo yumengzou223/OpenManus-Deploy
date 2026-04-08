@@ -249,7 +249,7 @@ def health_check():
 
 @app.route("/chat", methods=["POST"])
 def chat_search():
-    """智能论文搜索接口 - LLM 规划多路搜索 + 统一打分"""
+    """快速论文搜索：单次搜索 + 关键词打分，极简流程保证响应速度"""
     import asyncio
 
     api_key = request.headers.get("X-Api-Key", "")
@@ -264,93 +264,41 @@ def chat_search():
     if not DEEPSEEK_API_KEY:
         return jsonify({"error": "LLM not configured"}), 500
 
-    # Step 1：LLM 规划搜索方案
-    plan = asyncio.run(llm_plan_search(user_message))
+    # Step 1：LLM 翻译为英文关键词（限时 8 秒）
+    try:
+        plan = asyncio.run(asyncio.wait_for(llm_plan_search(user_message), timeout=8))
+    except Exception:
+        plan = {"search_queries": [user_message], "year_filter": None, "analysis": ""}
+
     queries = plan.get("search_queries", [user_message])
     year_filter = plan.get("year_filter")
     analysis = plan.get("analysis", "")
 
-    # Step 2：多路并发搜索（减少每路数量，加快速度）
-    async def search_all():
-        tasks = [search_arxiv(q, 5, year_filter, q) for q in queries]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+    # Step 2：单次搜索（只搜第一个词，限时 12 秒）
+    keyword = queries[0] if queries else user_message
+    try:
+        all_papers = asyncio.run(asyncio.wait_for(
+            search_arxiv(keyword, 8, year_filter, keyword), timeout=12))
+    except Exception:
         all_papers = []
-        seen_ids = set()
-        for res in results:
-            if isinstance(res, list):
-                for p in res:
-                    if p["url"] not in seen_ids:
-                        seen_ids.add(p["url"])
-                        all_papers.append(p)
-        return all_papers
 
-    all_papers = asyncio.run(search_all())
-
-    # 结果太少时：用核心词精确标题搜索后备
-    if len(all_papers) < 3:
-        core_words = [w for w in user_message.replace("近三年", "").replace("近两年", "").replace("最新", "").replace("研究", "").split() if len(w) > 2]
-        for w in core_words[:2]:
-            retry = asyncio.run(search_arxiv(w.strip(), 5, year_filter, w.strip()))
-            for p in retry:
-                if p["url"] not in {x["url"] for x in all_papers}:
-                    all_papers.append(p)
-
-    # 预先给所有论文一个默认分（确保超时后也有分数）
+    # Step 3：简单关键词打分（无需额外 API 调用）
     for p in all_papers:
-        p.setdefault("relevance_score", 5)
-        p.setdefault("relevance_reason", "")
+        title_lower = p["title"].lower()
+        kw_lower = keyword.lower()
+        kw_words = [w.strip() for w in kw_lower.split() if len(w.strip()) > 2]
+        hits = sum(1 for w in kw_words if w in title_lower)
+        # 标题命中越多分越高
+        p["relevance_score"] = min(10, hits * 3 + (5 if kw_lower in title_lower else 0))
+        p["relevance_reason"] = f"标题命中 {hits}/{len(kw_words)} 个关键词" if hits > 0 else "全文匹配"
 
-    # Step 3：LLM 批量打分，加全局超时保护
-    if all_papers and DEEPSEEK_API_KEY:
-        async def batch_score():
-            papers_json = json.dumps([{"title": p["title"], "summary": p["summary"][:400], "url": p["url"]} for p in all_papers], ensure_ascii=False)
-            score_prompt = f"""用户需求：\"{user_message}\"
-以下是候选论文列表（JSON格式）：
-{papers_json}
-
-请对每篇论文打分（0-10），判断其与用户需求的匹配程度：
-- 10分：完全符合，正是用户要找的
-- 7-9分：相关，但不够精准
-- 4-6分：有关系但偏差较大
-- 0-3分：无关或错误
-
-输出严格的JSON数组格式（无需其他内容）：
-[{{"url": "url1", "score": 9, "reason": "中文原因"}}, {{"url": "url2", "score": 5, "reason": "中文原因"}}, ...]"""
-            try:
-                async with httpx.AsyncClient(timeout=20) as client:
-                    sc = await client.post(
-                        DEEPSEEK_API_URL,
-                        headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
-                        json={"model": "deepseek-chat", "messages": [{"role": "user", "content": score_prompt}], "temperature": 0.2},
-                    )
-                    sc.raise_for_status()
-                    content = sc.json()["choices"][0]["message"]["content"]
-                    m = re.search(r'\[.*\]', content, re.DOTALL)
-                    if m:
-                        scores = json.loads(m.group())
-                        score_map = {item["url"]: {"score": item.get("score", 5), "reason": item.get("reason", "")} for item in scores}
-                        for p in all_papers:
-                            if p["url"] in score_map:
-                                p["relevance_score"] = score_map[p["url"]]["score"]
-                                p["relevance_reason"] = score_map[p["url"]]["reason"]
-            except Exception:
-                pass  # 保持默认分数
-
-            all_papers.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
-            return all_papers[:15]
-
-        try:
-            scored = asyncio.wait_for(batch_score(), timeout=40)
-            all_papers = asyncio.run(scored)
-        except Exception:
-            all_papers.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
-            all_papers = all_papers[:15]
+    all_papers.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
 
     return jsonify({
         "total": len(all_papers),
         "papers": all_papers,
         "analysis": analysis,
-        "queries_used": queries,
+        "queries_used": [keyword],
         "user_message": user_message,
     })
 
