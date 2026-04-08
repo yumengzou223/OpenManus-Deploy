@@ -305,9 +305,10 @@ def chat_search():
 
     # ========== LLM 自检：对每篇论文打分排序 ==========
     if papers and DEEPSEEK_API_KEY:
-        scored = []
-        for p in papers:
-            score_prompt = f"""用户需求："{user_message}"
+        async def score_papers_sync(paper_list):
+            scored = []
+            for p in paper_list:
+                score_prompt = f"""用户需求：\"{user_message}\"
 论文标题：{p['title']}
 论文摘要：{p['summary'][:300]}
 
@@ -320,34 +321,26 @@ def chat_search():
 - 4-6分：有相关性但不够精确
 - 1-3分：勉强相关
 - 0分：完全无关"""
-
-            try:
-                async with httpx.AsyncClient(timeout=15) as client:
-                    sc = await client.post(
-                        DEEPSEEK_API_URL,
-                        headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
-                        json={
-                            "model": "deepseek-chat",
-                            "messages": [{"role": "user", "content": score_prompt}],
-                            "temperature": 0.2,
-                        },
-                    )
-                    sc.raise_for_status()
-                    content = sc.json()["choices"][0]["message"]["content"]
-                    import re
-                    m = re.search(r'"score":\s*(\d+)', content)
-                    score = int(m.group(1)) if m else 5
-                    reason_match = re.search(r'"reason":\s*"([^"]+)"', content)
-                    reason = reason_match.group(1) if reason_match else ""
-            except Exception:
-                score = 5
-                reason = ""
-
-            scored.append({**p, "relevance_score": score, "relevance_reason": reason})
-
-        # 按分数降序排列
-        scored.sort(key=lambda x: x["relevance_score"], reverse=True)
-        papers = scored
+                try:
+                    async with httpx.AsyncClient(timeout=15) as client:
+                        sc = await client.post(
+                            DEEPSEEK_API_URL,
+                            headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
+                            json={"model": "deepseek-chat", "messages": [{"role": "user", "content": score_prompt}], "temperature": 0.2},
+                        )
+                        sc.raise_for_status()
+                        content = sc.json()["choices"][0]["message"]["content"]
+                        m = re.search(r'"score":\s*(\d+)', content)
+                        score = int(m.group(1)) if m else 5
+                        reason_match = re.search(r'"reason":\s*\"([^\"]+)\"', content)
+                        reason = reason_match.group(1) if reason_match else ""
+                except Exception:
+                    score = 5
+                    reason = ""
+                scored.append({**p, "relevance_score": score, "relevance_reason": reason})
+            scored.sort(key=lambda x: x["relevance_score"], reverse=True)
+            return scored
+        papers = asyncio.run(score_papers_sync(papers))
 
     return jsonify({
         "total": len(papers),
