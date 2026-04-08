@@ -6,6 +6,7 @@ import urllib.parse
 import xml.etree.ElementTree as ET
 import os
 import json
+import re
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -114,10 +115,10 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None) 
             for entry in root.findall("atom:entry", ns):
                 entry_id = entry.findtext("atom:id", "", ns)
                 if entry_id and entry_id not in seen_ids:
-                    # 年份过滤
-                    published = entry.findtext("atom:published", "")[:4]
-                    if year_filter and int(published) < year_filter:
-                        continue
+                    if year_filter:
+                        published = entry.findtext("atom:published", "")[:4]
+                        if int(published) < year_filter:
+                            continue
                     seen_ids.add(entry_id)
                     all_entries.append(entry)
         except Exception:
@@ -143,7 +144,7 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None) 
 
 
 async def llm_decide_search(user_message: str) -> dict:
-    """调用 DeepSeek LLM 解析用户意图，决定搜索关键词和过滤条件"""
+    """调用 DeepSeek LLM 解析用户意图"""
 
     system_prompt = """你是一个论文搜索助手。用户输入自然语言问题，你需要将其转化为精确的 arXiv 搜索查询。
 
@@ -158,11 +159,19 @@ async def llm_decide_search(user_message: str) -> dict:
 规则：
 - search_keyword 必须是英文，能直接用于 arXiv API 搜索
 - 如果用户提到具体领域（如医疗、法律、金融），关键词要包含
-- 如果用户说"近三年"、"近两年"，year_filter 用2022或2023
+- 如果用户说"近三年"、"近两年"，year_filter 用2023
 - 如果用户没指定数量，max_results 默认 8"""
 
+    if not DEEPSEEK_API_KEY:
+        return {
+            "search_keyword": user_message.strip(),
+            "year_filter": None,
+            "max_results": 8,
+            "explanation": "未配置 LLM，直接搜索用户输入",
+        }
+
     try:
-        async with httpx.AsyncClient(timeout=30) as client:
+        async with httpx.AsyncClient(timeout=20) as client:
             resp = await client.post(
                 DEEPSEEK_API_URL,
                 headers={
@@ -182,8 +191,6 @@ async def llm_decide_search(user_message: str) -> dict:
             result = resp.json()
             content = result["choices"][0]["message"]["content"]
 
-            # 提取 JSON
-            import re
             match = re.search(r"\{.*?\}", content, re.DOTALL)
             if match:
                 return json.loads(match.group())
@@ -192,15 +199,21 @@ async def llm_decide_search(user_message: str) -> dict:
                     "search_keyword": user_message.strip(),
                     "year_filter": None,
                     "max_results": 8,
-                    "explanation": "无法解析，直接搜索用户输入",
+                    "explanation": "无法解析 LLM 响应，直接搜索用户输入",
                 }
     except Exception as e:
         return {
             "search_keyword": user_message.strip(),
             "year_filter": None,
             "max_results": 8,
-            "explanation": f"LLM调用失败，直接搜索：{str(e)}",
+            "explanation": f"LLM 调用失败（{str(e)}），直接搜索用户输入",
         }
+
+
+# ====================== 全局错误处理 ======================
+@app.errorhandler(Exception)
+def handle_exception(e):
+    return jsonify({"error": f"Server error: {str(e)}"}), 500
 
 
 # ====================== 路由 ======================
@@ -230,17 +243,34 @@ def chat_search():
             "error": "LLM not configured, please set DEEPSEEK_API_KEY environment variable"
         }), 500
 
-    import asyncio
-
     # LLM 决策
-    decision = asyncio.run(llm_decide_search(user_message))
+    decision = None
+    try:
+        import asyncio
+        decision = asyncio.run(llm_decide_search(user_message))
+    except Exception as e:
+        return jsonify({
+            "error": f"LLM decision failed: {str(e)}",
+            "user_message": user_message,
+        }), 500
+
     search_keyword = decision.get("search_keyword", user_message)
     year_filter = decision.get("year_filter")
     max_results = min(int(decision.get("max_results", 8)), 20)
     explanation = decision.get("explanation", "")
 
     # 执行搜索
-    papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter))
+    papers = []
+    try:
+        import asyncio
+        papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter))
+    except Exception as e:
+        return jsonify({
+            "error": f"Search failed: {str(e)}",
+            "user_message": user_message,
+            "keyword": search_keyword,
+            "explanation": explanation,
+        }), 500
 
     return jsonify({
         "total": len(papers),
