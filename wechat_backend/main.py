@@ -33,9 +33,14 @@ ALLOWED_CATEGORIES = {
 }
 
 
-def is_relevant(title: str, abstract: str) -> bool:
+def is_relevant(title: str, abstract: str, search_keyword: str = "") -> bool:
+    """判断论文是否相关 - 宽松策略：只要求论文在 CS/AI 相关分类，不强制要求 RAG 关键词"""
     text = (title + " " + abstract).lower()
-    return any(term.lower() in text for term in STRONG_TERMS)
+    # 如果搜索词本身包含 RAG 相关的，才做 RAG 强过滤
+    if any(rag_term in search_keyword.lower() for rag_term in ["rag", "retrieval augmented", "llm", "large language"]):
+        return any(term.lower() in text for term in STRONG_TERMS)
+    # 其他搜索，只做分类过滤（更宽松）
+    return True
 
 
 def parse_entry(entry, ns):
@@ -78,7 +83,7 @@ def parse_entry(entry, ns):
         return None
 
 
-async def search_arxiv(keyword: str, max_results: int, year_filter: int = None) -> list[dict]:
+async def search_arxiv(keyword: str, max_results: int, year_filter: int = None, search_keyword: str = "") -> list[dict]:
     ns = {"atom": "http://www.w3.org/2005/Atom"}
     all_entries = []
     seen_ids = set()
@@ -127,7 +132,7 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None) 
     papers = []
     for entry in all_entries:
         parsed = parse_entry(entry, ns)
-        if parsed and is_relevant(parsed["title"], parsed["summary"]):
+        if parsed and is_relevant(parsed["title"], parsed["summary"], search_keyword):
             papers.append(parsed)
             if len(papers) >= max_results:
                 break
@@ -264,20 +269,25 @@ def chat_search():
     import asyncio
 
     # 第1次：原计划搜索
-    papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter))
+    papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter, search_keyword))
 
     # 第2次：如果结果少于3篇，去掉年份过滤
     if len(papers) < 3 and year_filter:
-        papers = asyncio.run(search_arxiv(search_keyword, max_results, None))
+        papers = asyncio.run(search_arxiv(search_keyword, max_results, None, search_keyword))
 
-    # 第3次：如果还是没结果，换更宽泛的关键词
+    # 第3次：如果还是没结果，扩大关键词范围
     if len(papers) < 3:
-        broad_keyword = "RAG " + " ".join(search_keyword.split()[-2:])
-        papers = asyncio.run(search_arxiv(broad_keyword, max_results, year_filter))
+        words = search_keyword.split()
+        if len(words) >= 2:
+            broad_keyword = " ".join(words[:max(1, len(words)-1)])
+        else:
+            broad_keyword = search_keyword.split()[0] if search_keyword else "machine learning"
+        papers = asyncio.run(search_arxiv(broad_keyword, max_results, year_filter, broad_keyword))
 
-    # 第4次：最后尝试只搜 RAG
+    # 第4次：最后尝试更通用的搜索
     if len(papers) < 3:
-        papers = asyncio.run(search_arxiv("RAG retrieval augmented generation", max_results, year_filter))
+        first_word = search_keyword.split()[0] if search_keyword else "machine learning"
+        papers = asyncio.run(search_arxiv(first_word, max_results, year_filter, first_word))
 
     return jsonify({
         "total": len(papers),
