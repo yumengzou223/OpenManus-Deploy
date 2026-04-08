@@ -1,28 +1,34 @@
 """
-微信小程序后端 - 论文检索与筛选 API
-基于 arXiv API，实现论文搜索过滤
+微信小程序后端 - 论文检索与筛选 API + DeepSeek LLM 智能决策
 """
 import httpx
 import urllib.parse
 import xml.etree.ElementTree as ET
+import os
+import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-# ====================== 配置 ======================
-API_KEY = "wk_paper_search_2026_zouyumeng"
 app = Flask(__name__)
 CORS(app)
 
-# ====================== arXiv 搜索逻辑 ======================
+# ====================== 配置 ======================
+API_KEY = "wk_paper_search_2026_zouyumeng"
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
+DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
+
 STRONG_TERMS = [
     "RAG", "Retrieval-Augmented", "Retrieval Augment",
     "retrieval augment", "retrieval-augmented", "augmented generation",
+    "large language model", "LLM", "transformer", "attention mechanism",
+    "information retrieval", "neural ranking", "semantic search",
+    "question answering", "knowledge base", "vector database",
 ]
 ALLOWED_CATEGORIES = {
     "cs.CL", "cs.LG", "cs.CV", "cs.AI", "cs.IR", "cs.NE",
     "cs.SE", "cs.CR", "cs.IT", "cs.RO", "cs.MA", "cs.SY",
     "eess.IV", "eess.SY", "eess.AS", "stat.ML", "q-fin",
-    "q-bio", "q-bio.QM", "cs.HC",
+    "q-bio", "q-bio.QM", "cs.HC", "cs.IR",
 }
 
 
@@ -71,7 +77,7 @@ def parse_entry(entry, ns):
         return None
 
 
-async def search_arxiv(keyword: str, max_results: int) -> list[dict]:
+async def search_arxiv(keyword: str, max_results: int, year_filter: int = None) -> list[dict]:
     ns = {"atom": "http://www.w3.org/2005/Atom"}
     all_entries = []
     seen_ids = set()
@@ -108,12 +114,15 @@ async def search_arxiv(keyword: str, max_results: int) -> list[dict]:
             for entry in root.findall("atom:entry", ns):
                 entry_id = entry.findtext("atom:id", "", ns)
                 if entry_id and entry_id not in seen_ids:
+                    # 年份过滤
+                    published = entry.findtext("atom:published", "")[:4]
+                    if year_filter and int(published) < year_filter:
+                        continue
                     seen_ids.add(entry_id)
                     all_entries.append(entry)
         except Exception:
             continue
 
-    # 相关性过滤
     papers = []
     for entry in all_entries:
         parsed = parse_entry(entry, ns)
@@ -122,7 +131,6 @@ async def search_arxiv(keyword: str, max_results: int) -> list[dict]:
             if len(papers) >= max_results:
                 break
 
-    # 回退：取所有中相关性最高的
     if len(papers) < max_results:
         for entry in all_entries:
             parsed = parse_entry(entry, ns)
@@ -134,32 +142,138 @@ async def search_arxiv(keyword: str, max_results: int) -> list[dict]:
     return papers
 
 
+async def llm_decide_search(user_message: str) -> dict:
+    """调用 DeepSeek LLM 解析用户意图，决定搜索关键词和过滤条件"""
+
+    system_prompt = """你是一个论文搜索助手。用户输入自然语言问题，你需要将其转化为精确的 arXiv 搜索查询。
+
+分析用户意图，输出 JSON 格式：
+{
+  "search_keyword": "转化的搜索关键词（英文，最重要）",
+  "year_filter": 最低发表年份（如2022），无限制则null,
+  "max_results": 返回论文数量（默认8）,
+  "explanation": "你做了什么搜索决策的简要说明（中文，1-2句）"
+}
+
+规则：
+- search_keyword 必须是英文，能直接用于 arXiv API 搜索
+- 如果用户提到具体领域（如医疗、法律、金融），关键词要包含
+- 如果用户说"近三年"、"近两年"，year_filter 用2022或2023
+- 如果用户没指定数量，max_results 默认 8"""
+
+    try:
+        async with httpx.AsyncClient(timeout=30) as client:
+            resp = await client.post(
+                DEEPSEEK_API_URL,
+                headers={
+                    "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "deepseek-chat",
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_message},
+                    ],
+                    "temperature": 0.3,
+                },
+            )
+            resp.raise_for_status()
+            result = resp.json()
+            content = result["choices"][0]["message"]["content"]
+
+            # 提取 JSON
+            import re
+            match = re.search(r"\{.*?\}", content, re.DOTALL)
+            if match:
+                return json.loads(match.group())
+            else:
+                return {
+                    "search_keyword": user_message.strip(),
+                    "year_filter": None,
+                    "max_results": 8,
+                    "explanation": "无法解析，直接搜索用户输入",
+                }
+    except Exception as e:
+        return {
+            "search_keyword": user_message.strip(),
+            "year_filter": None,
+            "max_results": 8,
+            "explanation": f"LLM调用失败，直接搜索：{str(e)}",
+        }
+
+
 # ====================== 路由 ======================
 @app.route("/health", methods=["GET"])
 def health_check():
-    return jsonify({"status": "ok", "service": "paper-fetcher-api"})
+    return jsonify({
+        "status": "ok",
+        "service": "paper-fetcher-api",
+        "llm_enabled": bool(DEEPSEEK_API_KEY),
+    })
+
+
+@app.route("/chat", methods=["POST"])
+def chat_search():
+    """智能论文搜索接口 - LLM 解析自然语言"""
+    api_key = request.headers.get("X-Api-Key", "")
+    if api_key != API_KEY:
+        return jsonify({"error": "API key invalid"}), 401
+
+    body = request.get_json()
+    if not body or not body.get("message"):
+        return jsonify({"error": "message is required"}), 400
+
+    user_message = body["message"].strip()
+    if not DEEPSEEK_API_KEY:
+        return jsonify({
+            "error": "LLM not configured, please set DEEPSEEK_API_KEY environment variable"
+        }), 500
+
+    import asyncio
+
+    # LLM 决策
+    decision = asyncio.run(llm_decide_search(user_message))
+    search_keyword = decision.get("search_keyword", user_message)
+    year_filter = decision.get("year_filter")
+    max_results = min(int(decision.get("max_results", 8)), 20)
+    explanation = decision.get("explanation", "")
+
+    # 执行搜索
+    papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter))
+
+    return jsonify({
+        "total": len(papers),
+        "papers": papers,
+        "keyword": search_keyword,
+        "year_filter": year_filter,
+        "explanation": explanation,
+        "user_message": user_message,
+    })
 
 
 @app.route("/search", methods=["POST"])
 def search_papers():
-    # 鉴权
+    """直接搜索接口（不经过 LLM）"""
     api_key = request.headers.get("X-Api-Key", "")
     if api_key != API_KEY:
-        return jsonify({"error": "API 密钥无效"}), 401
+        return jsonify({"error": "API key invalid"}), 401
 
     body = request.get_json()
     if not body or not body.get("keyword"):
-        return jsonify({"error": "关键词不能为空"}), 400
+        return jsonify({"error": "keyword required"}), 400
 
     keyword = body["keyword"].strip()
     max_results = min(int(body.get("max_results", 5)), 20)
+    year_filter = body.get("year_filter")
 
     import asyncio
-    papers = asyncio.run(search_arxiv(keyword, max_results))
+    papers = asyncio.run(search_arxiv(keyword, max_results, year_filter))
 
     return jsonify({
         "total": len(papers),
         "keyword": keyword,
+        "year_filter": year_filter,
         "papers": papers,
     })
 
@@ -167,9 +281,9 @@ def search_papers():
 @app.route("/", methods=["GET"])
 def root():
     return jsonify({
-        "message": "Paper Fetcher API",
-        "docs": "POST /search",
-        "endpoints": ["/health", "/search"],
+        "message": "Paper Fetcher API with DeepSeek LLM",
+        "endpoints": ["/health", "/chat", "/search"],
+        "llm_enabled": bool(DEEPSEEK_API_KEY),
     })
 
 
