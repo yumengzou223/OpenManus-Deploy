@@ -180,77 +180,56 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None, 
     return papers
 
 
-async def llm_decide_search(user_message: str) -> dict:
-    """调用 DeepSeek LLM 解析用户意图"""
+async def llm_plan_search(user_message: str) -> dict:
+    """调用 DeepSeek LLM 分析用户意图并规划搜索方案"""
 
-    system_prompt = """你是一个论文搜索助手。用户输入自然语言问题（包括中文、英文、混合），你需要将其转化为精确的 arXiv 英文搜索关键词。
+    system_prompt = """你是一个专业的研究论文搜索规划师。用户的自然语言问题（可能是中文、英文、混合），你要做深度理解，然后规划出最优的 arXiv 搜索策略。
 
-输出 JSON 格式：
+输出 JSON（必须严格遵守格式）：
 {
-  "search_keyword": "英文搜索关键词（必须，能直接用于 arXiv API）",
-  "year_filter": 最低发表年份（如2023），无限制则null,
-  "max_results": 返回论文数量（默认8）,
-  "explanation": "简要说明（中文1-2句）"
+  "analysis": "用1-2句话描述你如何理解用户需求（中文）",
+  "search_queries": [
+    "搜索变体1（英文，精确主题）",
+    "搜索变体2（英文，不同角度）",
+    "搜索变体3（英文，更广泛范围）"
+  ],
+  "year_filter": 最低年份数字，如2023；无限制则null
 }
 
-规则：
-- search_keyword 必须是英文，中文必须翻译成英文
-- 如果用户说"粒子群优化" → "particle swarm optimization"
-- 如果用户说"近三年" → year_filter = 2023
-- 如果用户说"近两年" → year_filter = 2024
-- 如果用户说"近一年" → year_filter = 2025
-- 如果用户提到金融/医疗/法律等具体领域 → 翻译并保留
-- search_keyword 不要包含"近三年"等时间词，只做 year_filter
-- max_results 默认 8"""
+搜索策略指南：
+- 中文需求 → 必须翻译成英文，变体之间要有差异
+- "粒子群优化" → 变体1: "particle swarm optimization", 变体2: "PSO algorithm optimization", 变体3: "swarm intelligence optimization"
+- "近三年的 transformer 最新进展" → year_filter=2023，变体分别搜 transformer 架构改进、应用、理论
+- 涉及具体领域（金融、医疗、法律）→ 每个变体都要带领域词
+- 3个变体要有差异化，不能只是同义词替换"""
 
     if not DEEPSEEK_API_KEY:
+        words = user_message.strip().split()
         return {
-            "search_keyword": user_message.strip(),
+            "analysis": "未配置 LLM，直接搜索",
+            "search_queries": [user_message.strip(), " ".join(words[:max(1, len(words)-1)]), words[0] if words else "machine learning"],
             "year_filter": None,
-            "max_results": 8,
-            "explanation": "未配置 LLM，直接搜索用户输入",
         }
 
     try:
         async with httpx.AsyncClient(timeout=20) as client:
             resp = await client.post(
                 DEEPSEEK_API_URL,
-                headers={
-                    "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": "deepseek-chat",
-                    "messages": [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_message},
-                    ],
-                    "temperature": 0.3,
-                },
+                headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
+                json={"model": "deepseek-chat", "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_message}], "temperature": 0.5},
             )
             resp.raise_for_status()
-            result = resp.json()
-            content = result["choices"][0]["message"]["content"]
-
+            content = resp.json()["choices"][0]["message"]["content"]
             match = re.search(r"\{.*?\}", content, re.DOTALL)
             if match:
                 return json.loads(match.group())
-            else:
-                return {
-                    "search_keyword": user_message.strip(),
-                    "year_filter": None,
-                    "max_results": 8,
-                    "explanation": "无法解析 LLM 响应，直接搜索用户输入",
-                }
-    except Exception as e:
-        return {
-            "search_keyword": user_message.strip(),
-            "year_filter": None,
-            "max_results": 8,
-            "explanation": f"LLM 调用失败（{str(e)}），直接搜索用户输入",
-        }
-
-
+    except Exception:
+        pass
+    return {
+        "analysis": "LLM 解析失败，使用原始输入",
+        "search_queries": [user_message.strip()],
+        "year_filter": None,
+    }
 # ====================== 全局错误处理 ======================
 @app.errorhandler(Exception)
 def handle_exception(e):
@@ -269,7 +248,9 @@ def health_check():
 
 @app.route("/chat", methods=["POST"])
 def chat_search():
-    """智能论文搜索接口 - LLM 解析自然语言"""
+    """智能论文搜索接口 - LLM 规划多路搜索 + 统一打分"""
+    import asyncio
+
     api_key = request.headers.get("X-Api-Key", "")
     if api_key != API_KEY:
         return jsonify({"error": "API key invalid"}), 401
@@ -280,96 +261,82 @@ def chat_search():
 
     user_message = body["message"].strip()
     if not DEEPSEEK_API_KEY:
-        return jsonify({
-            "error": "LLM not configured, please set DEEPSEEK_API_KEY environment variable"
-        }), 500
+        return jsonify({"error": "LLM not configured"}), 500
 
-    # LLM 决策
-    decision = None
-    try:
-        import asyncio
-        decision = asyncio.run(llm_decide_search(user_message))
-    except Exception as e:
-        return jsonify({
-            "error": f"LLM decision failed: {str(e)}",
-            "user_message": user_message,
-        }), 500
+    # Step 1：LLM 规划搜索方案
+    plan = asyncio.run(llm_plan_search(user_message))
+    queries = plan.get("search_queries", [user_message])
+    year_filter = plan.get("year_filter")
+    analysis = plan.get("analysis", "")
 
-    search_keyword = decision.get("search_keyword", user_message)
-    year_filter = decision.get("year_filter")
-    max_results = min(int(decision.get("max_results", 8)), 20)
-    explanation = decision.get("explanation", "")
+    # Step 2：多路并发搜索
+    async def search_all():
+        tasks = [search_arxiv(q, 8, year_filter, q) for q in queries]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        all_papers = []
+        seen_ids = set()
+        for res in results:
+            if isinstance(res, list):
+                for p in res:
+                    if p["url"] not in seen_ids:
+                        seen_ids.add(p["url"])
+                        all_papers.append(p)
+        return all_papers
 
-    # 执行搜索（最多尝试3次，逐步放宽条件）
-    papers = []
-    import asyncio
+    all_papers = asyncio.run(search_all())
 
-    # 第1次：原计划搜索
-    papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter, search_keyword))
+    # Step 3：LLM 统一打分（批量，一次调用）
+    if all_papers and DEEPSEEK_API_KEY:
+        async def batch_score():
+            papers_json = json.dumps([{"title": p["title"], "summary": p["summary"][:400], "url": p["url"]} for p in all_papers], ensure_ascii=False)
+            score_prompt = f"""用户需求：\"{user_message}\"
+以下是候选论文列表（JSON格式）：
+{papers_json}
 
-    # 第2次：如果结果少于3篇，去掉年份过滤
-    if len(papers) < 3 and year_filter:
-        papers = asyncio.run(search_arxiv(search_keyword, max_results, None, search_keyword))
+请对每篇论文打分（0-10），判断其与用户需求的匹配程度：
+- 10分：完全符合，正是用户要找的
+- 7-9分：相关，但不够精准
+- 4-6分：有关系但偏差较大
+- 0-3分：无关或错误
 
-    # 第3次：如果还是没结果，扩大关键词范围
-    if len(papers) < 3:
-        words = search_keyword.split()
-        if len(words) >= 2:
-            broad_keyword = " ".join(words[:max(1, len(words)-1)])
-        else:
-            broad_keyword = search_keyword.split()[0] if search_keyword else "machine learning"
-        papers = asyncio.run(search_arxiv(broad_keyword, max_results, year_filter, broad_keyword))
+输出严格的JSON数组格式（无需其他内容）：
+[{{"url": "url1", "score": 9, "reason": "中文原因"}}, {{"url": "url2", "score": 5, "reason": "中文原因"}}, ...]"""
+            try:
+                async with httpx.AsyncClient(timeout=30) as client:
+                    sc = await client.post(
+                        DEEPSEEK_API_URL,
+                        headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
+                        json={"model": "deepseek-chat", "messages": [{"role": "user", "content": score_prompt}], "temperature": 0.2},
+                    )
+                    sc.raise_for_status()
+                    content = sc.json()["choices"][0]["message"]["content"]
+                    # 提取 JSON 数组
+                    m = re.search(r'\[.*\]', content, re.DOTALL)
+                    if m:
+                        scores = json.loads(m.group())
+                        score_map = {item["url"]: {"score": item.get("score", 5), "reason": item.get("reason", "")} for item in scores}
+                        for p in all_papers:
+                            if p["url"] in score_map:
+                                p["relevance_score"] = score_map[p["url"]]["score"]
+                                p["relevance_reason"] = score_map[p["url"]]["reason"]
+                            else:
+                                p["relevance_score"] = 5
+                                p["relevance_reason"] = ""
+            except Exception:
+                for p in all_papers:
+                    p["relevance_score"] = 5
+                    p["relevance_reason"] = ""
 
-    # 第4次：最后尝试更通用的搜索
-    if len(papers) < 3:
-        first_word = search_keyword.split()[0] if search_keyword else "machine learning"
-        papers = asyncio.run(search_arxiv(first_word, max_results, year_filter, first_word))
+            all_papers.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
+            return all_papers[:20]
 
-    # ========== LLM 自检：对每篇论文打分排序 ==========
-    if papers and DEEPSEEK_API_KEY:
-        async def score_papers_sync(paper_list):
-            scored = []
-            for p in paper_list:
-                score_prompt = f"""用户需求：\"{user_message}\"
-论文标题：{p['title']}
-论文摘要：{p['summary'][:300]}
-
-请判断这篇论文是否符合用户需求，返回 JSON：
-{{"score": 0-10之间的整数, "reason": "1句话说明原因（中文）"}}
-
-评分标准：
-- 10分：完全符合，用户需求的研究方向
-- 7-9分：比较相关，方向接近
-- 4-6分：有相关性但不够精确
-- 1-3分：勉强相关
-- 0分：完全无关"""
-                try:
-                    async with httpx.AsyncClient(timeout=15) as client:
-                        sc = await client.post(
-                            DEEPSEEK_API_URL,
-                            headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
-                            json={"model": "deepseek-chat", "messages": [{"role": "user", "content": score_prompt}], "temperature": 0.2},
-                        )
-                        sc.raise_for_status()
-                        content = sc.json()["choices"][0]["message"]["content"]
-                        m = re.search(r'"score":\s*(\d+)', content)
-                        score = int(m.group(1)) if m else 5
-                        reason_match = re.search(r'"reason":\s*\"([^\"]+)\"', content)
-                        reason = reason_match.group(1) if reason_match else ""
-                except Exception:
-                    score = 5
-                    reason = ""
-                scored.append({**p, "relevance_score": score, "relevance_reason": reason})
-            scored.sort(key=lambda x: x["relevance_score"], reverse=True)
-            return scored
-        papers = asyncio.run(score_papers_sync(papers))
+        all_papers = asyncio.run(batch_score())
 
     return jsonify({
-        "total": len(papers),
-        "papers": papers,
-        "keyword": search_keyword,
-        "year_filter": year_filter,
-        "explanation": explanation,
+        "total": len(all_papers),
+        "papers": all_papers,
+        "analysis": analysis,
+        "queries_used": queries,
         "user_message": user_message,
     })
 
