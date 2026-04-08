@@ -120,11 +120,12 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None, 
             break
 
         encoded = urllib.parse.quote(query)
+        # 优先标题匹配（精确），同时搜全文（广泛）
         url = (
             f"https://export.arxiv.org/api/query"
-            f"?search_query=all:{encoded}"
+            f"?search_query=ti:{encoded}+OR+all:{encoded}"
             f"&start=0"
-            f"&max_results={max_results}"
+            f"&max_results={max_results * 2}"
             f"&sortBy=submittedDate"
             f"&sortOrder=descending"
         )
@@ -284,6 +285,15 @@ def chat_search():
         return all_papers
 
     all_papers = asyncio.run(search_all())
+
+    # 结果太少时：用更精炼的核心词重试
+    if len(all_papers) < 3:
+        core_words = [w for w in user_message.replace("近三年", "").replace("近两年", "").replace("最新", "").replace("研究", "").split() if len(w) > 2]
+        for w in core_words[:2]:
+            retry = asyncio.run(search_arxiv(w.strip(), 5, year_filter, w.strip()))
+            for p in retry:
+                if p["url"] not in {x["url"] for x in all_papers}:
+                    all_papers.append(p)
 
     # Step 3：LLM 统一打分（批量，一次调用）
     if all_papers and DEEPSEEK_API_KEY:
