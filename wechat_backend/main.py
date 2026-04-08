@@ -270,9 +270,9 @@ def chat_search():
     year_filter = plan.get("year_filter")
     analysis = plan.get("analysis", "")
 
-    # Step 2：多路并发搜索
+    # Step 2：多路并发搜索（减少每路数量，加快速度）
     async def search_all():
-        tasks = [search_arxiv(q, 8, year_filter, q) for q in queries]
+        tasks = [search_arxiv(q, 5, year_filter, q) for q in queries]
         results = await asyncio.gather(*tasks, return_exceptions=True)
         all_papers = []
         seen_ids = set()
@@ -286,7 +286,7 @@ def chat_search():
 
     all_papers = asyncio.run(search_all())
 
-    # 结果太少时：用更精炼的核心词重试
+    # 结果太少时：用核心词精确标题搜索后备
     if len(all_papers) < 3:
         core_words = [w for w in user_message.replace("近三年", "").replace("近两年", "").replace("最新", "").replace("研究", "").split() if len(w) > 2]
         for w in core_words[:2]:
@@ -295,7 +295,12 @@ def chat_search():
                 if p["url"] not in {x["url"] for x in all_papers}:
                     all_papers.append(p)
 
-    # Step 3：LLM 统一打分（批量，一次调用）
+    # 预先给所有论文一个默认分（确保超时后也有分数）
+    for p in all_papers:
+        p.setdefault("relevance_score", 5)
+        p.setdefault("relevance_reason", "")
+
+    # Step 3：LLM 批量打分，加全局超时保护
     if all_papers and DEEPSEEK_API_KEY:
         async def batch_score():
             papers_json = json.dumps([{"title": p["title"], "summary": p["summary"][:400], "url": p["url"]} for p in all_papers], ensure_ascii=False)
@@ -312,7 +317,7 @@ def chat_search():
 输出严格的JSON数组格式（无需其他内容）：
 [{{"url": "url1", "score": 9, "reason": "中文原因"}}, {{"url": "url2", "score": 5, "reason": "中文原因"}}, ...]"""
             try:
-                async with httpx.AsyncClient(timeout=30) as client:
+                async with httpx.AsyncClient(timeout=20) as client:
                     sc = await client.post(
                         DEEPSEEK_API_URL,
                         headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
@@ -320,7 +325,6 @@ def chat_search():
                     )
                     sc.raise_for_status()
                     content = sc.json()["choices"][0]["message"]["content"]
-                    # 提取 JSON 数组
                     m = re.search(r'\[.*\]', content, re.DOTALL)
                     if m:
                         scores = json.loads(m.group())
@@ -329,18 +333,18 @@ def chat_search():
                             if p["url"] in score_map:
                                 p["relevance_score"] = score_map[p["url"]]["score"]
                                 p["relevance_reason"] = score_map[p["url"]]["reason"]
-                            else:
-                                p["relevance_score"] = 5
-                                p["relevance_reason"] = ""
             except Exception:
-                for p in all_papers:
-                    p["relevance_score"] = 5
-                    p["relevance_reason"] = ""
+                pass  # 保持默认分数
 
             all_papers.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
-            return all_papers[:20]
+            return all_papers[:15]
 
-        all_papers = asyncio.run(batch_score())
+        try:
+            scored = asyncio.wait_for(batch_score(), timeout=40)
+            all_papers = asyncio.run(scored)
+        except Exception:
+            all_papers.sort(key=lambda x: x.get("relevance_score", 0), reverse=True)
+            all_papers = all_papers[:15]
 
     return jsonify({
         "total": len(all_papers),
