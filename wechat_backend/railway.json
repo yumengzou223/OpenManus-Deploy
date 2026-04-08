@@ -1,9 +1,1 @@
-# Railway 部署配置
-# 关键环境变量（Railway 会自动注入）：
-#   PORT         - Railway 端口（默认 8000）
-#   RAILWAY_ENVIRONMENTVariables  - 环境信息
-
-# Railway 使用 Nixpacks 自动检测 Python
-# 但为了稳定，我们用显式 Dockerfile
-
-version = "1.0.0"
+{}
