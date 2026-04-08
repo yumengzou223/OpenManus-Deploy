@@ -1,5 +1,1 @@
-SYSTEM_PROMPT = "You are an agent that can execute tool calls"
-
-NEXT_STEP_PROMPT = (
-    "If you want to stop interaction, use `terminate` tool/function call."
-)
+U1lTVEVNX1BST01QVCA9ICJZb3UgYXJlIGFuIGFnZW50IHRoYXQgY2FuIGV4ZWN1dGUgdG9vbCBjYWxscyIKCk5FWFRfU1RFUF9QUk9NUFQgPSAoCiAgICAiSWYgeW91IHdhbnQgdG8gc3RvcCBpbnRlcmFjdGlvbiwgdXNlIGB0ZXJtaW5hdGVgIHRvb2wvZnVuY3Rpb24gY2FsbC4iCikK

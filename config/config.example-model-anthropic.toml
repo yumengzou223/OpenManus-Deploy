@@ -1,16 +1,1 @@
-# Global LLM configuration
-[llm]
-model = "claude-3-7-sonnet-latest"        # The LLM model to use
-base_url = "https://api.anthropic.com/v1/"  # API endpoint URL
-api_key = "YOUR_API_KEY"                    # Your API key
-max_tokens = 8192                           # Maximum number of tokens in the response
-temperature = 0.0                           # Controls randomness
-
-
-# Optional configuration for specific LLM models
-[llm.vision]
-model = "claude-3-7-sonnet-20250219"        # The vision model to use
-base_url = "https://api.anthropic.com/v1/"  # API endpoint URL for vision model
-api_key = "YOUR_API_KEY"                    # Your API key for vision model
-max_tokens = 8192                           # Maximum number of tokens in the response
-temperature = 0.0                           # Controls randomness for vision model
+IyBHbG9iYWwgTExNIGNvbmZpZ3VyYXRpb24KW2xsbV0KbW9kZWwgPSAiY2xhdWRlLTMtNy1zb25uZXQtbGF0ZXN0IiAgICAgICAgIyBUaGUgTExNIG1vZGVsIHRvIHVzZQpiYXNlX3VybCA9ICJodHRwczovL2FwaS5hbnRocm9waWMuY29tL3YxLyIgICMgQVBJIGVuZHBvaW50IFVSTAphcGlfa2V5ID0gIllPVVJfQVBJX0tFWSIgICAgICAgICAgICAgICAgICAgICMgWW91ciBBUEkga2V5Cm1heF90b2tlbnMgPSA4MTkyICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBNYXhpbXVtIG51bWJlciBvZiB0b2tlbnMgaW4gdGhlIHJlc3BvbnNlCnRlbXBlcmF0dXJlID0gMC4wICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBDb250cm9scyByYW5kb21uZXNzCgoKIyBPcHRpb25hbCBjb25maWd1cmF0aW9uIGZvciBzcGVjaWZpYyBMTE0gbW9kZWxzCltsbG0udmlzaW9uXQptb2RlbCA9ICJjbGF1ZGUtMy03LXNvbm5ldC0yMDI1MDIxOSIgICAgICAgICMgVGhlIHZpc2lvbiBtb2RlbCB0byB1c2UKYmFzZV91cmwgPSAiaHR0cHM6Ly9hcGkuYW50aHJvcGljLmNvbS92MS8iICAjIEFQSSBlbmRwb2ludCBVUkwgZm9yIHZpc2lvbiBtb2RlbAphcGlfa2V5ID0gIllPVVJfQVBJX0tFWSIgICAgICAgICAgICAgICAgICAgICMgWW91ciBBUEkga2V5IGZvciB2aXNpb24gbW9kZWwKbWF4X3Rva2VucyA9IDgxOTIgICAgICAgICAgICAgICAgICAgICAgICAgICAjIE1heGltdW0gbnVtYmVyIG9mIHRva2VucyBpbiB0aGUgcmVzcG9uc2UKdGVtcGVyYXR1cmUgPSAwLjAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIENvbnRyb2xzIHJhbmRvbW5lc3MgZm9yIHZpc2lvbiBtb2RlbAo=

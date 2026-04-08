@@ -1,0 +1,19 @@
+2026-04-07 20:41:37.780 | WARNING  | __main__:main:25 - Processing your request...
+2026-04-07 20:41:37.781 | INFO     | app.agent.base:run:140 - Executing step 1/20
+2026-04-07 20:41:41.515 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2166, Completion=88, Cumulative Input=2166, Cumulative Completion=88, Total=2254, Cumulative Total=2254
+2026-04-07 20:41:41.515 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 我来帮您采集最近关于"大模型"的新闻并整理成简报。我将使用新闻采集工具来获取相关信息。
+2026-04-07 20:41:41.515 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:41:41.516 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-07 20:41:41.516 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "大模型", "max_results": 10}
+2026-04-07 20:41:41.517 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-07 20:41:56.540 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+Error: 新闻采集失败：
+2026-04-07 20:41:56.542 | INFO     | app.agent.base:run:140 - Executing step 2/20
+2026-04-07 20:41:59.869 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2369, Completion=97, Cumulative Input=4535, Cumulative Completion=185, Total=2466, Cumulative Total=4720
+2026-04-07 20:41:59.869 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 新闻采集工具出现了错误。让我尝试使用浏览器工具来搜索最新的"大模型"相关新闻，然后整理成简报。
+2026-04-07 20:41:59.870 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:41:59.870 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:41:59.870 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "web_search", "query": "大模型 最新新闻 2024 2025"}
+2026-04-07 20:41:59.870 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:42:09.508 | INFO     | app.tool.web_search:_try_all_engines:299 - 🔎 Attempting search with Google...
+2026-04-07 20:42:22.279 | INFO     | app.tool.mcp:disconnect:194 - Disconnected from all MCP servers

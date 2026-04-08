@@ -1,0 +1,81 @@
+2026-04-07 21:05:25.914 | WARNING  | __main__:main:25 - Processing your request...
+2026-04-07 21:05:25.915 | INFO     | app.agent.base:run:140 - Executing step 1/20
+2026-04-07 21:05:30.064 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2167, Completion=104, Cumulative Input=2167, Cumulative Completion=104, Total=2271, Cumulative Total=2271
+2026-04-07 21:05:30.064 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 我将帮您搜索粒子群算法（Particle Swarm Optimization, PSO）的最新研究进展和相关文献。让我使用新闻和学术论文搜索工具来获取最新信息。
+2026-04-07 21:05:30.064 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:05:30.066 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-07 21:05:30.066 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "粒子群算法 论文 最新研究", "max_results": 10}
+2026-04-07 21:05:30.067 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-07 21:05:43.032 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+未找到「粒子群算法 论文 最新研究」相关的新闻或论文，请尝试其他关键词。
+2026-04-07 21:05:43.032 | INFO     | app.agent.base:run:140 - Executing step 2/20
+2026-04-07 21:05:46.939 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2400, Completion=100, Cumulative Input=4567, Cumulative Completion=204, Total=2500, Cumulative Total=4771
+2026-04-07 21:05:46.940 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试使用英文关键词搜索，因为粒子群算法在国际上通常使用英文术语。同时，我也会尝试更具体的关键词组合。
+2026-04-07 21:05:46.941 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:05:46.942 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-07 21:05:46.942 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "Particle Swarm Optimization PSO research paper 2024", "max_results": 10}
+2026-04-07 21:05:46.943 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-07 21:06:00.278 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+未找到「Particle Swarm Optimization PSO research paper 2024」相关的新闻或论文，请尝试其他关键词。
+2026-04-07 21:06:00.279 | INFO     | app.agent.base:run:140 - Executing step 3/20
+2026-04-07 21:06:03.911 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2633, Completion=92, Cumulative Input=7200, Cumulative Completion=296, Total=2725, Cumulative Total=7496
+2026-04-07 21:06:03.913 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试使用浏览器搜索来获取更全面的信息。我将搜索粒子群算法的最新研究进展。
+2026-04-07 21:06:03.926 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:06:03.927 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 21:06:03.927 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "web_search", "query": "粒子群算法 最新研究进展 2024 论文"}
+2026-04-07 21:06:03.928 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 21:06:07.459 | INFO     | app.tool.web_search:_try_all_engines:299 - 🔎 Attempting search with Google...
+2026-04-07 21:06:25.510 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'web_search' failed: RetryError[<Future at 0x29144e27bd0 state=finished raised ConnectTimeout>]
+2026-04-07 21:06:25.511 | INFO     | app.agent.base:run:140 - Executing step 4/20
+2026-04-07 21:06:25.512 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 21:06:29.171 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2996, Completion=91, Cumulative Input=10196, Cumulative Completion=387, Total=3087, Cumulative Total=10583
+2026-04-07 21:06:29.173 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试直接访问学术搜索引擎和数据库来搜索粒子群算法的相关文献。首先，我将尝试访问Google Scholar。
+2026-04-07 21:06:29.173 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:06:29.173 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 21:06:29.173 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://scholar.google.com"}
+2026-04-07 21:06:29.173 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 21:06:59.187 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'go_to_url' failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://scholar.google.com/", waiting until "load"
+
+2026-04-07 21:06:59.187 | INFO     | app.agent.base:run:140 - Executing step 5/20
+2026-04-07 21:06:59.188 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 21:07:02.615 | INFO     | app.llm:update_token_count:243 - Token usage: Input=3368, Completion=88, Cumulative Input=13564, Cumulative Completion=475, Total=3456, Cumulative Total=14039
+2026-04-07 21:07:02.616 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试访问其他学术资源网站，比如arXiv预印本服务器，这是获取最新研究论文的好地方。
+2026-04-07 21:07:02.616 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:07:02.617 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 21:07:02.617 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://arxiv.org"}
+2026-04-07 21:07:02.617 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 21:07:03.883 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Navigated to https://arxiv.org
+2026-04-07 21:07:03.884 | INFO     | app.agent.base:run:140 - Executing step 6/20
+2026-04-07 21:07:03.885 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 21:07:07.591 | INFO     | app.llm:update_token_count:243 - Token usage: Input=3700, Completion=98, Cumulative Input=17264, Cumulative Completion=573, Total=3798, Cumulative Total=17837
+2026-04-07 21:07:07.593 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 现在我在arXiv主页。让我搜索粒子群算法的相关论文。首先，我需要找到搜索框并输入搜索关键词。
+2026-04-07 21:07:07.593 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:07:07.594 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 21:07:07.595 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "extract_content", "goal": "找到页面上的搜索框和搜索按钮，并查看页面结构"}
+2026-04-07 21:07:07.596 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 21:07:07.599 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'extract_content' failed: No module named 'markdownify'
+2026-04-07 21:07:07.600 | INFO     | app.agent.base:run:140 - Executing step 7/20
+2026-04-07 21:07:07.603 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 21:07:10.809 | INFO     | app.llm:update_token_count:243 - Token usage: Input=4054, Completion=81, Cumulative Input=21318, Cumulative Completion=654, Total=4135, Cumulative Total=21972
+2026-04-07 21:07:10.809 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试直接点击搜索框并输入搜索关键词。首先，我需要找到搜索框的索引。
+2026-04-07 21:07:10.809 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:07:10.809 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 21:07:10.810 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "click_element", "index": 1}
+2026-04-07 21:07:10.810 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 21:07:10.810 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'click_element' failed: 1
+2026-04-07 21:07:10.810 | INFO     | app.agent.base:run:140 - Executing step 8/20
+2026-04-07 21:07:10.810 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 21:07:15.133 | INFO     | app.llm:update_token_count:243 - Token usage: Input=4384, Completion=107, Cumulative Input=25702, Cumulative Completion=761, Total=4491, Cumulative Total=26463
+2026-04-07 21:07:15.133 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试使用不同的方法。我将直接访问arXiv的搜索页面，并使用粒子群算法的搜索关键词。
+2026-04-07 21:07:15.133 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:07:15.134 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 21:07:15.134 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://arxiv.org/search/?query=particle+swarm+optimization&searchtype=all&source=header"}
+2026-04-07 21:07:15.134 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 21:07:43.081 | INFO     | app.tool.mcp:disconnect:194 - Disconnected from all MCP servers

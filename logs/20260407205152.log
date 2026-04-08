@@ -1,0 +1,145 @@
+2026-04-07 20:52:53.003 | WARNING  | __main__:main:25 - Processing your request...
+2026-04-07 20:52:53.003 | INFO     | app.agent.base:run:140 - Executing step 1/20
+2026-04-07 20:52:57.094 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2148, Completion=112, Cumulative Input=2148, Cumulative Completion=112, Total=2260, Cumulative Total=2260
+2026-04-07 20:52:57.095 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 我来帮您收集粒子群算法最新改进方向的相关学术论文。我将使用多种方法来获取这些信息。
+
+首先，让我搜索一下粒子群算法（Particle Swarm Optimization, PSO）的最新研究进展：
+2026-04-07 20:52:57.095 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:52:57.096 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-07 20:52:57.097 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "粒子群算法 改进 最新研究", "max_results": 10}
+2026-04-07 20:52:57.097 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-07 20:52:58.213 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+未找到「粒子群算法 改进 最新研究」相关新闻，请稍后重试
+2026-04-07 20:52:58.213 | INFO     | app.agent.base:run:140 - Executing step 2/20
+2026-04-07 20:53:01.305 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2388, Completion=82, Cumulative Input=4536, Cumulative Completion=194, Total=2470, Cumulative Total=4730
+2026-04-07 20:53:01.306 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试用英文关键词搜索，因为学术论文通常使用英文：
+2026-04-07 20:53:01.306 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:53:01.306 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-07 20:53:01.306 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "Particle Swarm Optimization PSO improvements", "max_results": 10}
+2026-04-07 20:53:01.306 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-07 20:53:02.411 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+未找到「Particle Swarm Optimization PSO improvements」相关新闻，请稍后重试
+2026-04-07 20:53:02.411 | INFO     | app.agent.base:run:140 - Executing step 3/20
+2026-04-07 20:53:05.469 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2598, Completion=87, Cumulative Input=7134, Cumulative Completion=281, Total=2685, Cumulative Total=7415
+2026-04-07 20:53:05.470 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我使用浏览器搜索功能来查找相关的学术论文信息：
+2026-04-07 20:53:05.470 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:53:05.470 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:53:05.470 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "web_search", "query": "Particle Swarm Optimization recent improvements research papers 2023 2024"}
+2026-04-07 20:53:05.470 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:53:08.362 | INFO     | app.tool.web_search:_try_all_engines:299 - 🔎 Attempting search with Google...
+2026-04-07 20:53:26.433 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'web_search' failed: RetryError[<Future at 0x22e43843e90 state=finished raised ConnectTimeout>]
+2026-04-07 20:53:26.434 | INFO     | app.agent.base:run:140 - Executing step 4/20
+2026-04-07 20:53:26.435 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:53:29.932 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2956, Completion=87, Cumulative Input=10090, Cumulative Completion=368, Total=3043, Cumulative Total=10458
+2026-04-07 20:53:29.933 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试直接访问一些学术搜索引擎来查找相关论文。首先，让我尝试访问Google Scholar：
+2026-04-07 20:53:29.933 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:53:29.933 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:53:29.933 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://scholar.google.com"}
+2026-04-07 20:53:29.933 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:53:59.944 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'go_to_url' failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://scholar.google.com/", waiting until "load"
+
+2026-04-07 20:53:59.945 | INFO     | app.agent.base:run:140 - Executing step 5/20
+2026-04-07 20:53:59.946 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:03.174 | INFO     | app.llm:update_token_count:243 - Token usage: Input=3324, Completion=75, Cumulative Input=13414, Cumulative Completion=443, Total=3399, Cumulative Total=13857
+2026-04-07 20:54:03.176 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试访问其他学术网站，比如arXiv：
+2026-04-07 20:54:03.176 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:03.177 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:03.177 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://arxiv.org"}
+2026-04-07 20:54:03.178 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:04.199 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Navigated to https://arxiv.org
+2026-04-07 20:54:04.200 | INFO     | app.agent.base:run:140 - Executing step 6/20
+2026-04-07 20:54:04.201 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:07.009 | INFO     | app.llm:update_token_count:243 - Token usage: Input=3643, Completion=76, Cumulative Input=17057, Cumulative Completion=519, Total=3719, Cumulative Total=17576
+2026-04-07 20:54:07.009 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 很好！现在我在arXiv网站上。让我搜索粒子群算法的相关论文：
+2026-04-07 20:54:07.009 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:07.009 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:07.009 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "click_element", "index": 1}
+2026-04-07 20:54:07.009 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:07.010 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'click_element' failed: 1
+2026-04-07 20:54:07.010 | INFO     | app.agent.base:run:140 - Executing step 7/20
+2026-04-07 20:54:07.011 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:10.221 | INFO     | app.llm:update_token_count:243 - Token usage: Input=3968, Completion=83, Cumulative Input=21025, Cumulative Completion=602, Total=4051, Cumulative Total=21627
+2026-04-07 20:54:10.221 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我先查看当前页面的内容，了解可用的元素：
+2026-04-07 20:54:10.222 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:10.222 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:10.222 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "extract_content", "goal": "查看arXiv首页的搜索框和导航元素"}
+2026-04-07 20:54:10.222 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:10.222 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'extract_content' failed: No module named 'markdownify'
+2026-04-07 20:54:10.222 | INFO     | app.agent.base:run:140 - Executing step 8/20
+2026-04-07 20:54:10.224 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:13.479 | INFO     | app.llm:update_token_count:243 - Token usage: Input=4307, Completion=78, Cumulative Input=25332, Cumulative Completion=680, Total=4385, Cumulative Total=26012
+2026-04-07 20:54:13.480 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试直接使用arXiv的搜索功能。首先，让我尝试点击搜索框：
+2026-04-07 20:54:13.481 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:13.482 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:13.482 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "click_element", "index": 2}
+2026-04-07 20:54:13.483 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:13.484 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'click_element' failed: 2
+2026-04-07 20:54:13.486 | INFO     | app.agent.base:run:140 - Executing step 9/20
+2026-04-07 20:54:13.488 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:17.915 | INFO     | app.llm:update_token_count:243 - Token usage: Input=4634, Completion=99, Cumulative Input=29966, Cumulative Completion=779, Total=4733, Cumulative Total=30745
+2026-04-07 20:54:17.916 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试不同的方法。我将直接访问arXiv的搜索页面：
+2026-04-07 20:54:17.916 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:17.916 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:17.916 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://arxiv.org/search/?query=particle+swarm+optimization&searchtype=all&source=header"}
+2026-04-07 20:54:17.916 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:18.337 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Navigated to https://arxiv.org/search/?query=particle+swarm+optimization&searchtype=all&source=header
+2026-04-07 20:54:18.338 | INFO     | app.agent.base:run:140 - Executing step 10/20
+2026-04-07 20:54:18.338 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:21.644 | INFO     | app.llm:update_token_count:243 - Token usage: Input=4998, Completion=77, Cumulative Input=34964, Cumulative Completion=856, Total=5075, Cumulative Total=35820
+2026-04-07 20:54:21.647 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 很好！现在我在arXiv的搜索结果页面。让我向下滚动查看搜索结果：
+2026-04-07 20:54:21.647 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:21.648 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:21.649 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "scroll_down", "scroll_amount": 500}
+2026-04-07 20:54:21.650 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:21.667 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Scrolled down by 500 pixels
+2026-04-07 20:54:21.667 | INFO     | app.agent.base:run:140 - Executing step 11/20
+2026-04-07 20:54:21.668 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:24.692 | INFO     | app.llm:update_token_count:243 - Token usage: Input=5319, Completion=69, Cumulative Input=40283, Cumulative Completion=925, Total=5388, Cumulative Total=41208
+2026-04-07 20:54:24.692 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我继续滚动查看更多结果：
+2026-04-07 20:54:24.692 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:24.693 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:24.693 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "scroll_down", "scroll_amount": 1000}
+2026-04-07 20:54:24.693 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:24.698 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Scrolled down by 1000 pixels
+2026-04-07 20:54:24.698 | INFO     | app.agent.base:run:140 - Executing step 12/20
+2026-04-07 20:54:24.699 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:27.761 | INFO     | app.llm:update_token_count:243 - Token usage: Input=5633, Completion=79, Cumulative Input=45916, Cumulative Completion=1004, Total=5712, Cumulative Total=46920
+2026-04-07 20:54:27.762 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 现在让我尝试点击一个论文标题来查看详细信息。让我先尝试点击第一个结果：
+2026-04-07 20:54:27.762 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:27.762 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-07 20:54:27.762 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "click_element", "index": 3}
+2026-04-07 20:54:27.763 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-07 20:54:27.763 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'click_element' failed: 3
+2026-04-07 20:54:27.763 | INFO     | app.agent.base:run:140 - Executing step 13/20
+2026-04-07 20:54:27.764 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-07 20:54:49.820 | INFO     | app.llm:update_token_count:243 - Token usage: Input=5961, Completion=895, Cumulative Input=51877, Cumulative Completion=1899, Total=6856, Cumulative Total=53776
+2026-04-07 20:54:49.820 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试不同的方法。我将使用Python来搜索和收集粒子群算法改进方向的相关论文信息。让我创建一个Python脚本来搜索学术论文：
+2026-04-07 20:54:49.820 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:54:49.821 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['python_execute']
+2026-04-07 20:54:49.821 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"code": "import requests\nfrom bs4 import BeautifulSoup\nimport json\nimport re\nfrom datetime import datetime\n\n# 尝试从arXiv获取粒子群算法相关论文\ndef search_arxiv_papers(keyword, max_results=20):\n    \"\"\"从arXiv搜索相关论文\"\"\"\n    base_url = \"https://arxiv.org/search/\"\n    params = {\n        'query': keyword,\n        'searchtype': 'all',\n        'abstracts': 'show',\n        'order': '-announced_date_first',\n        'size': max_results\n    }\n    \n    try:\n        response = requests.get(base_url, params=params, timeout=30)\n        response.raise_for_status()\n        soup = BeautifulSoup(response.content, 'html.parser')\n        \n        papers = []\n        results = soup.find_all('li', class_='arxiv-result')\n        \n        for result in results[:max_results]:\n            try:\n                # 提取标题\n                title_elem = result.find('p', class_='title')\n                title = title_elem.text.strip() if title_elem else \"No title\"\n                \n                # 提取作者\n                authors_elem = result.find('p', class_='authors')\n                authors = authors_elem.text.strip() if authors_elem else \"No authors\"\n                \n                # 提取摘要\n                abstract_elem = result.find('p', class_='abstract')\n                abstract = abstract_elem.text.strip() if abstract_elem else \"No abstract\"\n                \n                # 提取日期\n                date_elem = result.find('p', class_='is-size-7')\n                date_text = date_elem.text.strip() if date_elem else \"\"\n                date_match = re.search(r'(\\d{4}-\\d{2}-\\d{2})', date_text)\n                date = date_match.group(1) if date_match else \"\"\n                \n                # 提取链接\n                link_elem = result.find('a', title='Abstract')\n                link = \"https://arxiv.org\" + link_elem['href'] if link_elem else \"\"\n                \n                papers.append({\n                    'title': title,\n                    'authors': authors,\n                    'abstract': abstract,\n                    'date': date,\n                    'link': link\n                })\n            except Exception as e:\n                print(f\"Error parsing paper: {e}\")\n                continue\n        \n        return papers\n    except Exception as e:\n        print(f\"Error fetching from arXiv: {e}\")\n        return []\n\n# 搜索粒子群算法改进相关的关键词\nkeywords = [\n    \"particle swarm optimization improvement\",\n    \"PSO algorithm enhancement\",\n    \"particle swarm optimization variants\",\n    \"PSO hybrid algorithms\",\n    \"adaptive particle swarm optimization\"\n]\n\nall_papers = []\nfor keyword in keywords:\n    print(f\"\\n搜索关键词: {keyword}\")\n    papers = search_arxiv_papers(keyword, max_results=10)\n    all_papers.extend(papers)\n    print(f\"找到 {len(papers)} 篇论文\")\n\n# 去重\nunique_papers = []\nseen_titles = set()\nfor paper in all_papers:\n    if paper['title'] not in seen_titles:\n        seen_titles.add(paper['title'])\n        unique_papers.append(paper)\n\nprint(f\"\\n总共找到 {len(unique_papers)} 篇不重复的论文\")\n\n# 按日期排序\nunique_papers.sort(key=lambda x: x['date'], reverse=True)\n\n# 显示最新的10篇论文\nprint(\"\\n=== 最新的10篇粒子群算法改进相关论文 ===\")\nfor i, paper in enumerate(unique_papers[:10], 1):\n    print(f\"\\n{i}. {paper['title']}\")\n    print(f\"   作者: {paper['authors']}\")\n    print(f\"   日期: {paper['date']}\")\n    print(f\"   摘要: {paper['abstract'][:200]}...\")\n    print(f\"   链接: {paper['link']}\")"}
+2026-04-07 20:54:49.821 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'python_execute'...
+2026-04-07 20:55:05.532 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'python_execute' completed its mission! Result: Observed output of cmd `python_execute` executed:
+{'observation': '\n搜索关键词: particle swarm optimization improvement\nError fetching from arXiv: 400 Client Error: Bad Request for url: https://arxiv.org/search/?query=particle+swarm+optimization+improvement&searchtype=all&abstracts=show&order=-announced_date_first&size=10\n找到 0 篇论文\n\n搜索关键词: PSO algorithm enhancement\nError fetching from arXiv: 400 Client Error: Bad Request for url: https://arxiv.org/search/?query=PSO+algorithm+enhancement&searchtype=all&abstracts=show&order=-announced_date_first&size=10\n找到 0 篇论文\n\n搜索关键词: particle swarm optimization variants\nError fetching from arXiv: 400 Client Error: Bad Request for url: https://arxiv.org/search/?query=particle+swarm+optimization+variants&searchtype=all&abstracts=show&order=-announced_date_first&size=10\n找到 0 篇论文\n\n搜索关键词: PSO hybrid algorithms\nError fetching from arXiv: 400 Client Error: Bad Request for url: https://arxiv.org/search/?query=PSO+hybrid+algorithms&searchtype=all&abstracts=show&order=-announced_date_first&size=10\n找到 0 篇论文\n\n搜索关键词: adaptive particle swarm optimization\nError fetching from arXiv: 400 Client Error: Bad Request for url: https://arxiv.org/search/?query=adaptive+particle+swarm+optimization&searchtype=all&abstracts=show&order=-announced_date_first&size=10\n找到 0 篇论文\n\n总共找到 0 篇不重复的论文\n\n=== 最新的10篇粒子群算法改进相关论文 ===\n', 'success': True}
+2026-04-07 20:55:05.532 | INFO     | app.agent.base:run:140 - Executing step 14/20
+2026-04-07 20:55:31.921 | INFO     | app.llm:update_token_count:243 - Token usage: Input=7352, Completion=1102, Cumulative Input=59229, Cumulative Completion=3001, Total=8454, Cumulative Total=62230
+2026-04-07 20:55:31.921 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试不同的方法。我将创建一个更简单的搜索脚本，并尝试从其他学术资源获取信息：
+2026-04-07 20:55:31.923 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 20:55:31.924 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['python_execute']
+2026-04-07 20:55:31.924 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"code": "import requests\nimport json\nimport time\n\n# 使用Semantic Scholar API搜索论文\ndef search_semantic_scholar(query, limit=10):\n    \"\"\"使用Semantic Scholar API搜索论文\"\"\"\n    base_url = \"https://api.semanticscholar.org/graph/v1/paper/search\"\n    params = {\n        'query': query,\n        'limit': limit,\n        'fields': 'title,authors,year,abstract,url,venue,citationCount'\n    }\n    \n    try:\n        response = requests.get(base_url, params=params, timeout=30)\n        response.raise_for_status()\n        data = response.json()\n        \n        papers = []\n        for paper in data.get('data', []):\n            papers.append({\n                'title': paper.get('title', 'No title'),\n                'authors': ', '.join([author['name'] for author in paper.get('authors', [])]),\n                'year': paper.get('year', 'Unknown'),\n                'abstract': paper.get('abstract', 'No abstract'),\n                'url': paper.get('url', 'No URL'),\n                'venue': paper.get('venue', 'Unknown venue'),\n                'citationCount': paper.get('citationCount', 0)\n            })\n        \n        return papers\n    except Exception as e:\n        print(f\"Error fetching from Semantic Scholar: {e}\")\n        return []\n\n# 搜索粒子群算法改进相关论文\nprint(\"正在搜索粒子群算法改进相关论文...\")\n\n# 定义搜索关键词\nsearch_queries = [\n    \"particle swarm optimization improvements\",\n    \"PSO algorithm enhancements\",\n    \"adaptive particle swarm optimization\",\n    \"hybrid particle swarm optimization\",\n    \"multi-objective particle swarm optimization\"\n]\n\nall_papers = []\nfor query in search_queries:\n    print(f\"\\n搜索: {query}\")\n    papers = search_semantic_scholar(query, limit=5)\n    all_papers.extend(papers)\n    print(f\"找到 {len(papers)} 篇论文\")\n    time.sleep(1)  # 避免请求过快\n\n# 去重\nunique_papers = []\nseen_titles = set()\nfor paper in all_papers:\n    if paper['title'] not in seen_titles:\n        seen_titles.add(paper['title'])\n        unique_papers.append(paper)\n\nprint(f\"\\n总共找到 {len(unique_papers)} 篇不重复的论文\")\n\n# 按年份和引用数排序\nunique_papers.sort(key=lambda x: (x['year'], x['citationCount']), reverse=True)\n\n# 显示结果\nprint(\"\\n=== 粒子群算法改进相关论文 ===\")\nfor i, paper in enumerate(unique_papers[:15], 1):\n    print(f\"\\n{i}. {paper['title']}\")\n    print(f\"   作者: {paper['authors']}\")\n    print(f\"   年份: {paper['year']}, 引用: {paper['citationCount']}\")\n    print(f\"   期刊/会议: {paper['venue']}\")\n    print(f\"   摘要: {paper['abstract'][:150]}...\" if paper['abstract'] else \"   摘要: 无摘要\")\n    print(f\"   链接: {paper['url']}\")\n\n# 分析改进方向\nprint(\"\\n=== 粒子群算法的主要改进方向分析 ===\")\nimprovement_directions = {\n    \"自适应PSO\": 0,\n    \"混合算法\": 0,\n    \"多目标PSO\": 0,\n    \"并行PSO\": 0,\n    \"约束处理\": 0,\n    \"动态环境\": 0\n}\n\n# 根据标题和摘要分析改进方向\nfor paper in unique_papers:\n    title_lower = paper['title'].lower()\n    abstract_lower = paper['abstract'].lower() if paper['abstract'] else \"\"\n    \n    if 'adaptive' in title_lower or 'adaptive' in abstract_lower:\n        improvement_directions[\"自适应PSO\"] += 1\n    if 'hybrid' in title_lower or 'hybrid' in abstract_lower:\n        improvement_directions[\"混合算法\"] += 1\n    if 'multi-objective' in title_lower or 'multiobjective' in title_lower:\n        improvement_directions[\"多目标PSO\"] += 1\n    if 'parallel' in title_lower or 'parallel' in abstract_lower:\n        improvement_directions[\"并行PSO\"] += 1\n    if 'constraint' in title_lower or 'constraint' in abstract_lower:\n        improvement_directions[\"约束处理\"] += 1\n    if 'dynamic' in title_lower or 'dynamic' in abstract_lower:\n        improvement_directions[\"动态环境\"] += 1\n\nprint(\"\\n改进方向统计:\")\nfor direction, count in improvement_directions.items():\n    print(f\"  {direction}: {count} 篇论文\")"}
+2026-04-07 20:55:31.927 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'python_execute'...
+2026-04-07 20:55:48.513 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'python_execute' completed its mission! Result: Observed output of cmd `python_execute` executed:
+{'observation': '正在搜索粒子群算法改进相关论文...\n\n搜索: particle swarm optimization improvements\nError fetching from Semantic Scholar: 429 Client Error:  for url: https://api.semanticscholar.org/graph/v1/paper/search?query=particle+swarm+optimization+improvements&limit=5&fields=title%2Cauthors%2Cyear%2Cabstract%2Curl%2Cvenue%2CcitationCount\n找到 0 篇论文\n\n搜索: PSO algorithm enhancements\nError fetching from Semantic Scholar: 429 Client Error:  for url: https://api.semanticscholar.org/graph/v1/paper/search?query=PSO+algorithm+enhancements&limit=5&fields=title%2Cauthors%2Cyear%2Cabstract%2Curl%2Cvenue%2CcitationCount\n找到 0 篇论文\n\n搜索: adaptive particle swarm optimization\nError fetching from Semantic Scholar: 429 Client Error:  for url: https://api.semanticscholar.org/graph/v1/paper/search?query=adaptive+particle+swarm+optimization&limit=5&fields=title%2Cauthors%2Cyear%2Cabstract%2Curl%2Cvenue%2CcitationCount\n找到 0 篇论文\n\n搜索: hybrid particle swarm optimization\nError fetching from Semantic Scholar: 429 Client Error:  for url: https://api.semanticscholar.org/graph/v1/paper/search?query=hybrid+particle+swarm+optimization&limit=5&fields=title%2Cauthors%2Cyear%2Cabstract%2Curl%2Cvenue%2CcitationCount\n找到 0 篇论文\n\n搜索: multi-objective particle swarm optimization\nError fetching from Semantic Scholar: 429 Client Error:  for url: https://api.semanticscholar.org/graph/v1/paper/search?query=multi-objective+particle+swarm+optimization&limit=5&fields=title%2Cauthors%2Cyear%2Cabstract%2Curl%2Cvenue%2CcitationCount\n找到 0 篇论文\n\n总共找到 0 篇不重复的论文\n\n=== 粒子群算法改进相关论文 ===\n\n=== 粒子群算法的主要改进方向分析 ===\n\n改进方向统计:\n  自适应PSO: 0 篇论文\n  混合算法: 0 篇论文\n  多目标PSO: 0 篇论文\n  并行PSO: 0 篇论文\n  约束处理: 0 篇论文\n  动态环境: 0 篇论文\n', 'success': True}
+2026-04-07 20:55:48.513 | INFO     | app.agent.base:run:140 - Executing step 15/20
+2026-04-07 20:56:04.261 | INFO     | app.tool.mcp:disconnect:194 - Disconnected from all MCP servers

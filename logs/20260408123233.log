@@ -1,0 +1,79 @@
+2026-04-08 12:32:40.518 | WARNING  | __main__:main:25 - Processing your request...
+2026-04-08 12:32:40.520 | INFO     | app.agent.base:run:140 - Executing step 1/20
+2026-04-08 12:32:44.319 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2162, Completion=106, Cumulative Input=2162, Cumulative Completion=106, Total=2268, Cumulative Total=2268
+2026-04-08 12:32:44.319 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 我来帮您搜索关于RAG（检索增强生成）的最新论文，并整理成文献综述报告。我将使用新闻搜索工具来获取最新的研究动态，然后整理成报告。
+2026-04-08 12:32:44.319 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:32:44.320 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-08 12:32:44.320 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "RAG 检索增强生成 论文", "max_results": 10}
+2026-04-08 12:32:44.322 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-08 12:32:45.826 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+关键词「RAG 检索增强生成 论文」相关新闻（共3条）：
+
+1. 【RAG已死?——从检索增强到记忆架构的范式迁移 | 人人都是产品经理】
+   来源：人人都是产品经理 | 摘要：暂无摘要
+   链接：https://www.woshipm.com/ai/6365390.html
+
+2. 【用检索增强生成让大模型更强大,这里有个手把手的Python实现】
+   来源：机器之心Pro | 摘要：暂无摘要
+   链接：https://baijiahao.baidu.com/s?id=1783139281026769656&wfr=spider&for=pc
+
+3. 【RAG还是微调?微软出了一份特定领域大模型应用建设流程指南】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_26367994
+
+
+2026-04-08 12:32:45.827 | INFO     | app.agent.base:run:140 - Executing step 2/20
+2026-04-08 12:32:48.734 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2570, Completion=81, Cumulative Input=4732, Cumulative Completion=187, Total=2651, Cumulative Total=4919
+2026-04-08 12:32:48.734 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试更具体的搜索关键词来获取学术论文信息：
+2026-04-08 12:32:48.735 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:32:48.735 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-08 12:32:48.735 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "Retrieval-Augmented Generation RAG paper", "max_results": 10}
+2026-04-08 12:32:48.735 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-08 12:32:50.205 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+关键词「Retrieval-Augmented Generation RAG paper」相关新闻（共9条）：
+
+1. 【RAG已死?——从检索增强到记忆架构的范式迁移 | 人人都是产品经理】
+   来源：人人都是产品经理 | 摘要：暂无摘要
+   链接：https://www.woshipm.com/ai/6365390.html
+
+2. 【谷歌10M上下文窗口正在杀死RAG?被Sora夺走风头的Gemini被低估了?】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_26478612
+
+3. 【大模型幻觉率排行:GPT-4 3%最低,谷歌Palm竟然高达27.2%】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_25295740
+
+4. 【Haystack 2.0解锁智能问答新玩法】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：http://www.thepaper.cn/newsDetail_forward_27538222
+
+5. 【拥抱数据的力量,转动生成式AI的飞轮】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_27302397
+
+6. 【剑桥团队开源:首个预训练通用多模态后期交互知识检索器】
+   来源：新浪财经 | 摘要：暂无摘要
+   链接：https://baijiahao.baidu.com/s?id=1794497952169232702&wfr=spider&for=pc
+
+7. 【黄仁勋对话Transformer七子:所有的机器学习都是颠覆者,人类正见证...】
+   来源：钛媒体APP | 摘要：暂无摘要
+   链接：https://baijiahao.baidu.com/s?id=1794147830394803894&wfr=spider&for=pc
+
+8. 【用检索增强生成让大模型更强大,这里有个手把手的Python实现】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_25369583
+
+9. 【致命幻觉问题、开发GPU替代品,大模型还面临这10大挑战】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_24384318?commTag=true
+
+
+2026-04-08 12:32:50.207 | INFO     | app.agent.base:run:140 - Executing step 3/20
+2026-04-08 12:32:53.896 | INFO     | app.llm:update_token_count:243 - Token usage: Input=3278, Completion=102, Cumulative Input=8010, Cumulative Completion=289, Total=3380, Cumulative Total=8299
+2026-04-08 12:32:53.896 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试使用浏览器搜索来获取更详细的学术论文信息。我将搜索arXiv等学术平台上的最新RAG论文：
+2026-04-08 12:32:53.897 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:32:53.897 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-08 12:32:53.897 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "web_search", "query": "site:arxiv.org \"Retrieval-Augmented Generation\" 2024 latest papers"}
+2026-04-08 12:32:53.897 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-08 12:32:56.532 | INFO     | app.tool.mcp:disconnect:194 - Disconnected from all MCP servers

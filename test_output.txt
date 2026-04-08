@@ -1,0 +1,39 @@
+Type: <class 'app.tool.base.ToolResult'>
+Result str: 关键词「RAG retrieval augmented generation」相关论文（共5篇）：
+
+==================================================
+[1] BioModelsRAG: A Biological Modeling Assistant Using RAG (Retrieval Augmented Generation)
+作者：Bhavyahshree Navaneetha Krishnan、Adel Heydarabadipour、Herbert Sauro
+发布：2026-01-30 | 分类：q-bio.MN
+摘要：The BioModels database is one of the premier databases for computational models in systems biology. The database contains over 1000 curated models and an even larger number of non-curated models. All ...
+链接：https://arxiv.org/abs/2601.22684v1
+
+==================================================
+[2] Reasoning Over Recall: Evaluating the Efficacy of Generalist Architectures vs. Specialized Fine-Tunes in RAG-Based Mental Health Dialogue Systems
+作者：Md Abdullah Al Kafi、Raka Moni、Sumit Kumar Banshal
+发布：2026-01-04 | 分类：cs.CL
+摘要：The deployment of Large Language Models (LLMs) in mental health counseling faces the dual challenges of hallucinations and lack of empathy. While the former may be mitigated by RAG (retrieval-augmente...
+链接：https://arxiv.org/abs/2601.01341v1
+
+==================================================
+[3] The Instruction Gap: LLMs get lost in Following Instruction
+作者：Vishesh Tripathi、Uday Allu、Biddwan Ahmed
+发布：2025-12-19 | 分类：cs.CL
+摘要：Large Language Models (LLMs) have shown remarkable capabilities in natural language understanding and generation, yet their deployment in enterprise environments reveals a critical limitation: inconsi...
+链接：https://arxiv.org/abs/2601.03269v1
+
+==================================================
+[4] Demystifying deep search: a holistic evaluation with hint-free multi-hop questions and factorised metrics
+作者：Maojia Song、Renhang Liu、Xinyu Wang 等9人
+发布：2025-10-01 | 分类：cs.CL
+摘要：RAG (Retrieval-Augmented Generation) systems and web agents are increasingly evaluated on multi-hop deep search tasks, yet current practice suffers from two major limitations. First, most benchmarks l...
+链接：https://arxiv.org/abs/2510.05137v3
+
+==================================================
+[5] Reinforcement Learning Integrated Agentic RAG for Software Test Cases Authoring
+作者：Mohanakrishnan Hariharan
+发布：2025-12-05 | 分类：cs.SE
+摘要：This paper introduces a framework that integrates reinforcement learning (RL) with autonomous agents to enable continuous improvement in the automated process of software test cases authoring from bus...
+链接：https://arxiv.org/abs/2512.06060v1
+
+

@@ -1,0 +1,209 @@
+[
+  {
+    "title": "Paper Circle: An Open-source Multi-agent Research Discovery and Analysis Framework",
+    "authors": [
+      "Komal Kumar",
+      "Aman Chadha",
+      "Salman Khan",
+      "Fahad Shahbaz Khan",
+      "Hisham Cholakkal"
+    ],
+    "abstract": "The rapid growth of scientific literature has made it increasingly difficult for researchers to efficiently discover, evaluate, and synthesize relevant work. Recent advances in multi-agent large language models (LLMs) have demonstrated strong potential for understanding user intent and are being trained to utilize various tools. In this paper, we introduce Paper Circle, a multi-agent research discovery and analysis system designed to reduce the effort required to find, assess, organize, and understand academic literature. The system comprises two complementary pipelines: (1) a Discovery Pipeline that integrates offline and online retrieval from multiple sources, multi-criteria scoring, diversity-aware ranking, and structured outputs; and (2) an Analysis Pipeline that transforms individual papers into structured knowledge graphs with typed nodes such as concepts, methods, experiments, and figures, enabling graph-aware question answering and coverage verification. Both pipelines are implemented within a coder LLM-based multi-agent orchestration framework and produce fully reproducible, synchronized outputs including JSON, CSV, BibTeX, Markdown, and HTML at each agent step. This paper describes the system architecture, agent roles, retrieval and scoring methods, knowledge graph schema, and evaluation interfaces that together form the Paper Circle research workflow. We benchmark Paper Circle on both paper retrieval and paper review generation, reporting hit rate, MRR, and Recall at K. Results show consistent improvements with stronger agent models. We have publicly released the website at https://papercircle.vercel.app/ and the code at https://github.com/MAXNORM8650/papercircle.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06170v1",
+    "link": "https://arxiv.org/abs/2604.06170v1"
+  },
+  {
+    "title": "In-Place Test-Time Training",
+    "authors": [
+      "Guhao Feng",
+      "Shengjie Luo",
+      "Kai Hua",
+      "Ge Zhang",
+      "Di He",
+      "Wenhao Huang",
+      "Tianle Cai"
+    ],
+    "abstract": "The static ``train then deploy\" paradigm fundamentally limits Large Language Models (LLMs) from dynamically adapting their weights in response to continuous streams of new information inherent in real-world tasks. Test-Time Training (TTT) offers a compelling alternative by updating a subset of model parameters (fast weights) at inference time, yet its potential in the current LLM ecosystem is hindered by critical barriers including architectural incompatibility, computational inefficiency and misaligned fast weight objectives for language modeling. In this work, we introduce In-Place Test-Time Training (In-Place TTT), a framework that seamlessly endows LLMs with Test-Time Training ability. In-Place TTT treats the final projection matrix of the ubiquitous MLP blocks as its adaptable fast weights, enabling a ``drop-in\" enhancement for LLMs without costly retraining from scratch. Furthermore, we replace TTT's generic reconstruction objective with a tailored, theoretically-grounded objective explicitly aligned with the Next-Token-Prediction task governing autoregressive language modeling. This principled objective, combined with an efficient chunk-wise update mechanism, results in a highly scalable algorithm compatible with context parallelism. Extensive experiments validate our framework's effectiveness: as an in-place enhancement, it enables a 4B-parameter model to achieve superior performance on tasks with contexts up to 128k, and when pretrained from scratch, it consistently outperforms competitive TTT-related approaches. Ablation study results further provide deeper insights on our design choices. Collectively, our results establish In-Place TTT as a promising step towards a paradigm of continual learning in LLMs.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06169v1",
+    "link": "https://arxiv.org/abs/2604.06169v1"
+  },
+  {
+    "title": "Action Images: End-to-End Policy Learning via Multiview Video Generation",
+    "authors": [
+      "Haoyu Zhen",
+      "Zixian Gao",
+      "Qiao Sun",
+      "Yilin Zhao",
+      "Yuncong Yang",
+      "Yilun Du",
+      "Tsun-Hsuan Wang",
+      "Yi-Ling Qiao",
+      "Chuang Gan"
+    ],
+    "abstract": "World action models (WAMs) have emerged as a promising direction for robot policy learning, as they can leverage powerful video backbones to model the future states. However, existing approaches often rely on separate action modules, or use action representations that are not pixel-grounded, making it difficult to fully exploit the pretrained knowledge of video models and limiting transfer across viewpoints and environments. In this work, we present Action Images, a unified world action model that formulates policy learning as multiview video generation. Instead of encoding control as low-dimensional tokens, we translate 7-DoF robot actions into interpretable action images: multi-view action videos that are grounded in 2D pixels and explicitly track robot-arm motion. This pixel-grounded action representation allows the video backbone itself to act as a zero-shot policy, without a separate policy head or action module. Beyond control, the same unified model supports video-action joint generation, action-conditioned video generation, and action labeling under a shared representation. On RLBench and real-world evaluations, our model achieves the strongest zero-shot success rates and improves video-action joint generation quality over prior video-space world models, suggesting that interpretable action images are a promising route to policy learning.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06168v1",
+    "link": "https://arxiv.org/abs/2604.06168v1"
+  },
+  {
+    "title": "On supertoken graphs",
+    "authors": [
+      "Mónica A. Reyes",
+      "Cristina Dalfó",
+      "Miquel Àngel Fiol"
+    ],
+    "abstract": "We generalize the concept of token graphs to obtain supertoken graphs. In the latter case, there can be more than one token in a vertex. We formally define supertoken graphs and establish their basic properties. Moreover, we provide some bounds and exact values on the independence number, clique number, and chromatic number of these graphs. Finally, we construct a new infinite family of graphs, which we call the $p$-augmented 2-token graphs of cycles, and study their properties, including the spectral radius or largest adjacency eigenvalue.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06164v1",
+    "link": "https://arxiv.org/abs/2604.06164v1"
+  },
+  {
+    "title": "Data, Not Model: Explaining Bias toward LLM Texts in Neural Retrievers",
+    "authors": [
+      "Wei Huang",
+      "Keping Bi",
+      "Yinqiong Cai",
+      "Wei Chen",
+      "Jiafeng Guo",
+      "Xueqi Cheng"
+    ],
+    "abstract": "Recent studies show that neural retrievers often display source bias, favoring passages generated by LLMs over human-written ones, even when both are semantically similar. This bias has been considered an inherent flaw of retrievers, raising concerns about the fairness and reliability of modern information access systems. Our work challenges this view by showing that source bias stems from supervision in retrieval datasets rather than the models themselves. We found that non-semantic differences, like fluency and term specificity, exist between positive and negative documents, mirroring differences between LLM and human texts. In the embedding space, the bias direction from negatives to positives aligns with the direction from human-written to LLM-generated texts. We theoretically show that retrievers inevitably absorb the artifact imbalances in the training data during contrastive learning, which leads to their preferences over LLM texts. To mitigate the effect, we propose two approaches: 1) reducing artifact differences in training data and 2) adjusting LLM text vectors by removing their projection on the bias vector. Both methods substantially reduce source bias. We hope our study alleviates some concerns regarding LLM-generated texts in information access systems.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06163v1",
+    "link": "https://arxiv.org/abs/2604.06163v1"
+  },
+  {
+    "title": "Mutual Linearity in and out of Stationarity for Markov Jump Processes: A Trajectory-Based Approach",
+    "authors": [
+      "Jiming Zheng",
+      "Zhiyue Lu"
+    ],
+    "abstract": "Nonequilibrium response theory is a fundamental framework for understanding how physical systems respond to perturbations. Recently, a mutual linearity has been discovered for Markov jump processes using linear algebra analysis. This mutual linearity states that two observables are linearly dependent on each other in the long-time limit when the transition rate of a single edge is altered. It has also been extended to non-stationary cases for current observables. In this work, we provide a trajectory-based derivation of mutual linearity utilizing the trajectory-level linear response theory. The trajectory approach allows us to generalize the mutual linearity to non-stationary relaxation dynamics for state observables and counting observables. Our results shed light on the fundamental response properties far from equilibrium and the trajectory-level origin of mutual linearity. Our trajectory-based approach makes it possible to generalize the mutual linearity to a broader class of systems, including diffusion processes and open quantum systems.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06162v1",
+    "link": "https://arxiv.org/abs/2604.06162v1"
+  },
+  {
+    "title": "DiffHDR: Re-Exposing LDR Videos with Video Diffusion Models",
+    "authors": [
+      "Zhengming Yu",
+      "Li Ma",
+      "Mingming He",
+      "Leo Isikdogan",
+      "Yuancheng Xu",
+      "Dmitriy Smirnov",
+      "Pablo Salamanca",
+      "Dao Mi",
+      "Pablo Delgado",
+      "Ning Yu",
+      "Julien Philip",
+      "Xin Li",
+      "Wenping Wang",
+      "Paul Debevec"
+    ],
+    "abstract": "Most digital videos are stored in 8-bit low dynamic range (LDR) formats, where much of the original high dynamic range (HDR) scene radiance is lost due to saturation and quantization. This loss of highlight and shadow detail precludes mapping accurate luminance to HDR displays and limits meaningful re-exposure in post-production workflows. Although techniques have been proposed to convert LDR images to HDR through dynamic range expansion, they struggle to restore realistic detail in the over- and underexposed regions. To address this, we present DiffHDR, a framework that formulates LDR-to-HDR conversion as a generative radiance inpainting task within the latent space of a video diffusion model. By operating in Log-Gamma color space, DiffHDR leverages spatio-temporal generative priors from a pretrained video diffusion model to synthesize plausible HDR radiance in over- and underexposed regions while recovering the continuous scene radiance of the quantized pixels. Our framework further enables controllable LDR-to-HDR video conversion guided by text prompts or reference images. To address the scarcity of paired HDR video data, we develop a pipeline that synthesizes high-quality HDR video training data from static HDRI maps. Extensive experiments demonstrate that DiffHDR significantly outperforms state-of-the-art approaches in radiance fidelity and temporal stability, producing realistic HDR videos with considerable latitude for re-exposure.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06161v1",
+    "link": "https://arxiv.org/abs/2604.06161v1"
+  },
+  {
+    "title": "Distributionally Robust Regret Optimal LQR with Common Stage-Law Ambiguity",
+    "authors": [
+      "Lukas-Benedikt Fiechtner",
+      "Jose Blanchet"
+    ],
+    "abstract": "We study, to our knowledge, the first tractable multistage ex-ante distributionally robust regret optimization (DRRO) formulation for stochastic control. We consider finite-horizon LQR under common stage-law ambiguity: disturbances are independent across time but share an unknown stage law whose mean and covariance lie in a Gelbrich ball around nominal parameters. Unlike the single-stage quadratic case, the nominal certainty-equivalent (CE) controller is generally not regret-optimal, because reuse of the stage law makes past disturbances informative for future decisions. Despite the general NP-hardness of DRRO, we show that over linear disturbance-feedback policies the resulting multistage DRRO-LQR problem admits an exact semidefinite programming reformulation. The optimal controller is the nominal certainty-equivalent LQR law plus a strictly causal empirical-mean correction. We also characterize worst-case distributions and show that those for the DRRO-optimal policy are nonunique. Numerical results show that, relative to the corresponding DRO controller under the same ambiguity set, DRRO is often substantially less conservative while preserving the intended regret guarantee, and that its correction coefficients empirically approach the certainty-equivalent feedforward coefficient.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06158v1",
+    "link": "https://arxiv.org/abs/2604.06158v1"
+  },
+  {
+    "title": "MMEmb-R1: Reasoning-Enhanced Multimodal Embedding with Pair-Aware Selection and Adaptive Control",
+    "authors": [
+      "Yuchi Wang",
+      "Haiyang Yu",
+      "Weikang Bian",
+      "Jiefeng Long",
+      "Xiao Liang",
+      "Chao Feng",
+      "Hongsheng Li"
+    ],
+    "abstract": "MLLMs have been successfully applied to multimodal embedding tasks, yet their generative reasoning capabilities remain underutilized. Directly incorporating chain-of-thought reasoning into embedding learning introduces two fundamental challenges. First, structural misalignment between instance-level reasoning and pairwise contrastive supervision may lead to shortcut behavior, where the model merely learns the superficial format of reasoning. Second, reasoning is not universally beneficial for embedding tasks. Enforcing reasoning for all inputs may introduce unnecessary computation and latency, and can even obscure salient semantic signals for simple cases. To address these issues, we propose MMEmb-R1, an adaptive reasoning-based multimodal embedding framework. We formulate reasoning as a latent variable and introduce pair-aware reasoning selection that employs counterfactual intervention to identify reasoning paths beneficial for query-target alignment. Furthermore, we adopt reinforcement learning to selectively invoke reasoning only when necessary. Experiments on the MMEB-V2 benchmark demonstrate that our model achieves a score of 71.2 with only 4B parameters, establishing a new state-of-the-art while significantly reducing reasoning overhead and inference latency.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06156v1",
+    "link": "https://arxiv.org/abs/2604.06156v1"
+  },
+  {
+    "title": "Exclusive Unlearning",
+    "authors": [
+      "Mutsumi Sasaki",
+      "Kouta Nakayama",
+      "Yusuke Miyao",
+      "Yohei Oseki",
+      "Masaru Isonuma"
+    ],
+    "abstract": "When introducing Large Language Models (LLMs) into industrial applications, such as healthcare and education, the risk of generating harmful content becomes a significant challenge. While existing machine unlearning methods can erase specific harmful knowledge and expressions, diverse harmful content makes comprehensive removal difficult. In this study, instead of individually listing targets for forgetting, we propose Exclusive Unlearning (EU), which aims for broad harm removal by extensively forgetting everything except for the knowledge and expressions we wish to retain. We demonstrate that through Exclusive Unlearning, it is possible to obtain a model that ensures safety against a wide range of inputs, including jailbreaks, while maintaining the ability to respond to diverse instructions related to specific domains such as medicine and mathematics.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06154v1",
+    "link": "https://arxiv.org/abs/2604.06154v1"
+  },
+  {
+    "title": "Random number generation from a self-chaotic broad-area VCSEL",
+    "authors": [
+      "Yohann G. Sanvert",
+      "Jules Mercadier",
+      "Stefan Bittner",
+      "Marc Sciamanna"
+    ],
+    "abstract": "The nonlinear dynamics of transverse and polarization modes of a broad-area vertical-cavity surface-emitting laser (BA-VCSEL) exhibit, without any external perturbation, chaos with high correlation dimension, large bandwidth (BW), and good spectral flatness over a wide range of currents. We leverage this for high bit-rate entropy generation and random number generation (RNG), passing the NIST tests with rates up to 150~Gb/s, and observe a correlation between the correlation dimension and the number of passed NIST tests. The RNG shows consistent performance across a wide range of parameters. In contrast to other setups, our system does not require optical feedback or optical injection to generate chaos, making it simple, compact and robust.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06152v1",
+    "link": "https://arxiv.org/abs/2604.06152v1"
+  },
+  {
+    "title": "Error Correction in Lattice Quantum Electrodynamics with Quantum Reference Frames",
+    "authors": [
+      "Elias Rothlin",
+      "Carla Ferradini",
+      "Lin-Qing Chen"
+    ],
+    "abstract": "Is gauge symmetry merely a redundancy in our description, or does it carry a deeper information-theoretic significance? Quantum error-correcting codes (QECCs) show that redundancy can serve as a resource for protecting information against noise. In this work, we ask whether gauge theories can be understood in similar terms, and make this idea concrete in lattice quantum electrodynamics (QED), building on and extending earlier works that established a bridge between gauge systems, stabilizer codes, and quantum reference frames (QRFs). For Abelian gauge groups, we show that explicit recovery operations can be constructed using group-theoretical methods for error sets determined by both ideal and non-ideal QRFs. Applied to lattice QED, this yields two QECC structures: one in the pure-gauge sector and one including fermions. We construct a gauge-field QRF based on spanning trees of the lattice and a fermionic field QRF from the matter field, thereby making explicit how physical information is encoded. While the syndromes of gauge-violating errors associated with constraint measurements are generically degenerate, QRFs resolve this degeneracy and single out families of correctable errors. This establishes lattice QED as a QECC beyond the stabilizer setting and shows concretely how gauge symmetry provides an encoding structure that supports error correction.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06149v1",
+    "link": "https://arxiv.org/abs/2604.06149v1"
+  },
+  {
+    "title": "From generating functions to the geometric Binder cumulant",
+    "authors": [
+      "Balázs Hetényi"
+    ],
+    "abstract": "We present an overview of the role of generating functions in quantum mechanical contexts, mainly in the modern theory of polarization and in the study of quantum phase transitions. Generating functions enable the derivation of moments and cumulants, quantities which characterize the fluctuations of an underlying probability distribution. In all of the cases we review, the fluctuations are those of a quantum system. We show that the original formalism for geometric phases, in which a quantum system is taken around an adiabatic cycle, can be extended to the case when degeneracy points are encountered along the cycle (quasiadiabatic cycles). The essential tool for this extension is a generalized Bargmann invariant which plays the role of a generating function. From the cumulants generated this way one can form ratios according to the Binder cumulant scheme in statistical mechanics. Such geometric Binder cumulants are sensitive to gap closure, as such, they are useful in identifying metal-insulator transitions, localization, and quantum phase transitions. We present example calculations on simple model systems, whose localization properties are well known, to validate to approach. We also complement our geometric Binder cumulant calculations with results for the fidelity susceptibility, a quantity directly related to the quantum geometry of the parameter space.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06147v1",
+    "link": "https://arxiv.org/abs/2604.06147v1"
+  },
+  {
+    "title": "Massive Exchange and the Sign of the Equilateral Bispectrum",
+    "authors": [
+      "Diptimoy Ghosh",
+      "Suvashis Maity",
+      "Farman Ullah"
+    ],
+    "abstract": "We study the inflationary bispectrum generated by the tree-level exchange of a massive hidden-sector scalar during inflation. When the interaction between the inflaton and the hidden sector arises only from the leading boost-breaking operator of the Effective Field Theory (EFT) of inflation, the equilateral bispectrum for principal-series scalar exchange is known to be universally negative, independent of the sign of the coupling. We revisit this result within the full EFT operator basis. Using bootstrap methods, we construct the de Sitter-invariant seed four-point function and obtain the inflationary bispectrum via weight-shifting operators and a soft-limit procedure. While the equilateral bispectrum remains strictly negative when only the leading interaction is present, additional operators generate independent cubic structures whose contributions compete in the equilateral configuration. As a result, the sign of the bispectrum is no longer universal. We derive a critical ratio of interaction coefficients that separates regions of positive and negative equilateral bispectrum. We further study the effects of reduced sound speed $c_s<1$ and the exchange of multiple particles. In both cases, the critical ratio is modified, and for multi-particle exchange a positive equilateral bispectrum can arise even when the higher-order operator is subdominant. Our results show that the negativity of the equilateral bispectrum from massive exchange is not generic, but reflects a restricted operator structure in the EFT of inflation.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06145v1",
+    "link": "https://arxiv.org/abs/2604.06145v1"
+  },
+  {
+    "title": "Analytically generated sharply o-minimal structures",
+    "authors": [
+      "Oded Carmon"
+    ],
+    "abstract": "We describe a class of sharply o-minimal structures, called analytically generated structures, whose definable sets and their complexity filtration are determined by the collection of definable complex cells.\n  We prove a polynomially effective parameterization theorem using real complex cells for real sets definable in such structures. Following Binyamini--Novikov, this allows us to establish a polynomially effective version of the Yomdin--Gromov lemma on C^r-smooth parameterizations of definable sets, which implies Wilkie's conjecture on polylogarithmic bounds for the amount of algebraic points of bounded height and degree in the transcendental part of a definable set.\n  In addition, we obtain a polynomially effective preparation theorem for definable functions, similar to the subanalytic preparation theorems of Parusinski and of Lion--Rolin.",
+    "published": "2026-04-07",
+    "arxiv_id": "2604.06144v1",
+    "link": "https://arxiv.org/abs/2604.06144v1"
+  }
+]

@@ -1,10 +1,1 @@
-# Python version check: 3.11-3.13
-import sys
-
-
-if sys.version_info < (3, 11) or sys.version_info > (3, 13):
-    print(
-        "Warning: Unsupported Python version {ver}, please use 3.11-3.13".format(
-            ver=".".join(map(str, sys.version_info))
-        )
-    )
+IyBQeXRob24gdmVyc2lvbiBjaGVjazogMy4xMS0zLjEzCmltcG9ydCBzeXMKCgppZiBzeXMudmVyc2lvbl9pbmZvIDwgKDMsIDExKSBvciBzeXMudmVyc2lvbl9pbmZvID4gKDMsIDEzKToKICAgIHByaW50KAogICAgICAgICJXYXJuaW5nOiBVbnN1cHBvcnRlZCBQeXRob24gdmVyc2lvbiB7dmVyfSwgcGxlYXNlIHVzZSAzLjExLTMuMTMiLmZvcm1hdCgKICAgICAgICAgICAgdmVyPSIuIi5qb2luKG1hcChzdHIsIHN5cy52ZXJzaW9uX2luZm8pKQogICAgICAgICkKICAgICkK

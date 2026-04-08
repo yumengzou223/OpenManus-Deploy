@@ -1,0 +1,130 @@
+2026-04-08 12:40:16.137 | WARNING  | __main__:main:25 - Processing your request...
+2026-04-08 12:40:16.138 | INFO     | app.agent.base:run:140 - Executing step 1/20
+2026-04-08 12:40:20.130 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2164, Completion=102, Cumulative Input=2164, Cumulative Completion=102, Total=2266, Cumulative Total=2266
+2026-04-08 12:40:20.131 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 我来帮您搜索关于RAG（检索增强生成）的最新论文，并整理成文献综述报告。我将使用新闻搜索工具来获取最新的相关论文信息。
+2026-04-08 12:40:20.131 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:40:20.132 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-08 12:40:20.133 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "RAG 检索增强生成 论文", "max_results": 10}
+2026-04-08 12:40:20.133 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-08 12:40:21.271 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+关键词「RAG 检索增强生成 论文」相关新闻（共3条）：
+
+1. 【RAG已死?——从检索增强到记忆架构的范式迁移 | 人人都是产品经理】
+   来源：人人都是产品经理 | 摘要：暂无摘要
+   链接：https://www.woshipm.com/ai/6365390.html
+
+2. 【用检索增强生成让大模型更强大,这里有个手把手的Python实现】
+   来源：机器之心Pro | 摘要：暂无摘要
+   链接：https://baijiahao.baidu.com/s?id=1783139281026769656&wfr=spider&for=pc
+
+3. 【RAG还是微调?微软出了一份特定领域大模型应用建设流程指南】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_26367994
+
+
+2026-04-08 12:40:21.271 | INFO     | app.agent.base:run:140 - Executing step 2/20
+2026-04-08 12:40:24.732 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2568, Completion=86, Cumulative Input=4732, Cumulative Completion=188, Total=2654, Cumulative Total=4920
+2026-04-08 12:40:24.733 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试更具体的搜索关键词来获取更多关于RAG的学术论文信息：
+2026-04-08 12:40:24.734 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:40:24.734 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-08 12:40:24.735 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "Retrieval-Augmented Generation RAG paper", "max_results": 10}
+2026-04-08 12:40:24.737 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-08 12:40:25.610 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+关键词「Retrieval-Augmented Generation RAG paper」相关新闻（共9条）：
+
+1. 【RAG已死?——从检索增强到记忆架构的范式迁移 | 人人都是产品经理】
+   来源：人人都是产品经理 | 摘要：暂无摘要
+   链接：https://www.woshipm.com/ai/6365390.html
+
+2. 【谷歌10M上下文窗口正在杀死RAG?被Sora夺走风头的Gemini被低估了?】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_26478612
+
+3. 【大模型幻觉率排行:GPT-4 3%最低,谷歌Palm竟然高达27.2%】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_25295740
+
+4. 【Haystack 2.0解锁智能问答新玩法】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：http://www.thepaper.cn/newsDetail_forward_27538222
+
+5. 【拥抱数据的力量,转动生成式AI的飞轮】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_27302397
+
+6. 【剑桥团队开源:首个预训练通用多模态后期交互知识检索器】
+   来源：新浪财经 | 摘要：暂无摘要
+   链接：https://baijiahao.baidu.com/s?id=1794497952169232702&wfr=spider&for=pc
+
+7. 【黄仁勋对话Transformer七子:所有的机器学习都是颠覆者,人类正见证...】
+   来源：钛媒体APP | 摘要：暂无摘要
+   链接：https://baijiahao.baidu.com/s?id=1794147830394803894&wfr=spider&for=pc
+
+8. 【用检索增强生成让大模型更强大,这里有个手把手的Python实现】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_25369583
+
+9. 【致命幻觉问题、开发GPU替代品,大模型还面临这10大挑战】
+   来源：澎湃新闻 | 摘要：暂无摘要
+   链接：https://www.thepaper.cn/newsDetail_forward_24384318?commTag=true
+
+
+2026-04-08 12:40:25.611 | INFO     | app.agent.base:run:140 - Executing step 3/20
+2026-04-08 12:40:29.240 | INFO     | app.llm:update_token_count:243 - Token usage: Input=3281, Completion=97, Cumulative Input=8013, Cumulative Completion=285, Total=3378, Cumulative Total=8298
+2026-04-08 12:40:29.240 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试使用浏览器工具来搜索更学术性的RAG论文信息。我将访问学术搜索引擎或相关学术网站：
+2026-04-08 12:40:29.241 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:40:29.241 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-08 12:40:29.241 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "web_search", "query": "RAG Retrieval-Augmented Generation latest research papers 2024"}
+2026-04-08 12:40:29.241 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-08 12:40:36.099 | INFO     | app.tool.web_search:_try_all_engines:299 - 🔎 Attempting search with Google...
+2026-04-08 12:40:37.655 | INFO     | app.tool.web_search:_try_all_engines:299 - 🔎 Attempting search with Baidu...
+2026-04-08 12:40:40.591 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Search results for 'RAG Retrieval-Augmented Generation latest research papers 2024':
+
+1. 光学系统先进制造全国重点实验室
+   URL: http://www.baidu.com/link?url=t2zQmvdjYpWIER5toSht4MyDGt_EqdVyvT-caD75g3gKUOsstwYnN85nQlnwKF1YtDnw6wCHKhVus-NeYxBiza
+   Description: 光学系统先进制造全国重点实验室
+
+2024年,团队基于该研究在《TALANTA》等期刊发表JCR一区论文1篇,二区论文2篇,授权国家发明专利3项,获批吉林省科技发展计划重点研发项目1项,团队成员在中国微米纳米技术学会创新论坛做大会特邀报告1项,分论坛邀请报告1项,仪器信息网第六届流式细胞技术网络会议特邀报告1项,相关技术应用于与吉林大学联合开展的白血病化疗耐药分析研究之中, 
+
+
+中国科学院长春光学精密机械与物理研究所
+
+
+
+
+
+
+播报
+
+
+
+暂停
+   Content: å å­¦ç³»ç»å è¿å¶é å ¨å½éç¹å®éªå®¤ ARPç³»ç» | English é¦é¡µ åºæ¬æ åµ å®éªå®¤ä»ç» åå±åç¨ ç»ç»æ¡æ¶ å­¦æ¯å§åä¼ å®éªå®¤ä¸»ä»» æç¥ç§å­¦å®¶ æ°é»å ¬å å­¦æ¯å¨æ ç§ç è¿å± ç§ç ææ å¢éæ¦åµ å¼æ¾äº¤æµ å­¦æ¯æ´»å¨ å¼æ¾è¯¾é¢ ä»ªå¨è®¾å¤ å ç¾¤å­å° å®£ä¼ å¾ å å­¦ç³»ç»å è¿å¶é å ¨å½éç¹å®éªå®¤ç¬¬ä¸å±å­¦æ¯å§åä¼2024å¹´åº¦ä¼è®® å­åºä¿¯ç°å¾ å½åä½ç½®ï¼ é¦é¡µ ç§ç è¿å± å­¦æ¯å¨æ ç§ç è¿å± ç§ç ææ ç§ç è¿å± ç§ç è¿å± 2024å¹´åº¦éè¦ç§ç è¿å± 1.â ç ç©¶æ¹åä¸ï¼å è¿å å­¦æåçè®ºä¸æ¹æ³ ï¼1ï¼å¹´åº¦éè¦è¿å±1ï¼é«éæ æ è®°ç»èä¸ç»´å è°±æå å®éªå®¤æååæèªå-åæ¿ææ¼åæ¨¡æç©ºé´å ±å®ä½ææ¯ï¼åºäºåæ¿ææ¼å±æå®ç°é«éæ æ è®°ç»èä¸ç»´å è°±æåï¼è·åç»èå æºåå­ç©ºé´åå¸ï¼è¡¨å¾ç»èäºç»æç¹å¾ï¼å¼å¯¼èªåææ¼è¿è¡ç²¾åèªå¨éæ ·ï¼å®ç°ç©ºé´å®ä½ææ¼å è°±æºè½æ£æµï¼è§£å³ç»èææ¼â...
+
+Metadata:
+- Total results: 1
+- Language: en
+- Country: us
+2026-04-08 12:40:40.592 | INFO     | app.agent.base:run:140 - Executing step 4/20
+2026-04-08 12:40:40.593 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-08 12:40:44.055 | INFO     | app.llm:update_token_count:243 - Token usage: Input=5136, Completion=82, Cumulative Input=13149, Cumulative Completion=367, Total=5218, Cumulative Total=13516
+2026-04-08 12:40:44.055 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试访问学术搜索引擎如Google Scholar来搜索RAG相关论文：
+2026-04-08 12:40:44.055 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:40:44.056 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-08 12:40:44.056 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://scholar.google.com"}
+2026-04-08 12:40:44.056 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-08 12:41:14.075 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'browser_use' completed its mission! Result: Observed output of cmd `browser_use` executed:
+Error: Browser action 'go_to_url' failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://scholar.google.com/", waiting until "load"
+
+2026-04-08 12:41:14.077 | INFO     | app.agent.base:run:140 - Executing step 5/20
+2026-04-08 12:41:14.078 | DEBUG    | app.agent.browser:get_browser_state:36 - Browser state error: Failed to get browser state: BrowserContext.get_state() missing 1 required positional argument: 'cache_clickable_elements_hashes'
+2026-04-08 12:41:17.603 | INFO     | app.llm:update_token_count:243 - Token usage: Input=5499, Completion=80, Cumulative Input=18648, Cumulative Completion=447, Total=5579, Cumulative Total=19095
+2026-04-08 12:41:17.604 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试使用其他学术网站，比如arXiv来搜索RAG论文：
+2026-04-08 12:41:17.605 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-08 12:41:17.606 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['browser_use']
+2026-04-08 12:41:17.607 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"action": "go_to_url", "url": "https://arxiv.org"}
+2026-04-08 12:41:17.608 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'browser_use'...
+2026-04-08 12:41:35.213 | INFO     | app.tool.mcp:disconnect:194 - Disconnected from all MCP servers

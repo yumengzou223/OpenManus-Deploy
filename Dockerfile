@@ -1,13 +1,1 @@
-FROM python:3.12-slim
-
-WORKDIR /app/OpenManus
-
-RUN apt-get update && apt-get install -y --no-install-recommends git curl \
-    && rm -rf /var/lib/apt/lists/* \
-    && (command -v uv >/dev/null 2>&1 || pip install --no-cache-dir uv)
-
-COPY . .
-
-RUN uv pip install --system -r requirements.txt
-
-CMD ["bash"]
+RlJPTSBweXRob246My4xMi1zbGltCgpXT1JLRElSIC9hcHAvT3Blbk1hbnVzCgpSVU4gYXB0LWdldCB1cGRhdGUgJiYgYXB0LWdldCBpbnN0YWxsIC15IC0tbm8taW5zdGFsbC1yZWNvbW1lbmRzIGdpdCBjdXJsIFwKICAgICYmIHJtIC1yZiAvdmFyL2xpYi9hcHQvbGlzdHMvKiBcCiAgICAmJiAoY29tbWFuZCAtdiB1diA+L2Rldi9udWxsIDI+JjEgfHwgcGlwIGluc3RhbGwgLS1uby1jYWNoZS1kaXIgdXYpCgpDT1BZIC4gLgoKUlVOIHV2IHBpcCBpbnN0YWxsIC0tc3lzdGVtIC1yIHJlcXVpcmVtZW50cy50eHQKCkNNRCBbImJhc2giXQo=

@@ -1,13 +1,1 @@
-class ToolError(Exception):
-    """Raised when a tool encounters an error."""
-
-    def __init__(self, message):
-        self.message = message
-
-
-class OpenManusError(Exception):
-    """Base exception for all OpenManus errors"""
-
-
-class TokenLimitExceeded(OpenManusError):
-    """Exception raised when the token limit is exceeded"""
+Y2xhc3MgVG9vbEVycm9yKEV4Y2VwdGlvbik6CiAgICAiIiJSYWlzZWQgd2hlbiBhIHRvb2wgZW5jb3VudGVycyBhbiBlcnJvci4iIiIKCiAgICBkZWYgX19pbml0X18oc2VsZiwgbWVzc2FnZSk6CiAgICAgICAgc2VsZi5tZXNzYWdlID0gbWVzc2FnZQoKCmNsYXNzIE9wZW5NYW51c0Vycm9yKEV4Y2VwdGlvbik6CiAgICAiIiJCYXNlIGV4Y2VwdGlvbiBmb3IgYWxsIE9wZW5NYW51cyBlcnJvcnMiIiIKCgpjbGFzcyBUb2tlbkxpbWl0RXhjZWVkZWQoT3Blbk1hbnVzRXJyb3IpOgogICAgIiIiRXhjZXB0aW9uIHJhaXNlZCB3aGVuIHRoZSB0b2tlbiBsaW1pdCBpcyBleGNlZWRlZCIiIgo=

@@ -1,0 +1,26 @@
+# Global LLM Configuration
+[llm]
+model = "deepseek-chat"
+base_url = "https://api.deepseek.com/v1"
+api_key = "YOUR_API_KEY_HERE"
+max_tokens = 4096
+temperature = 0.0
+
+# Browser configuration
+[browser]
+headless = false
+disable_security = true
+
+# Search settings
+[search]
+engine = "Google"
+lang = "zh"
+fallback_engines = ["DuckDuckGo", "Baidu", "Bing"]
+
+# MCP
+[mcp]
+server_reference = "app.mcp.server"
+
+# Runflow
+[runflow]
+use_data_analysis_agent = false

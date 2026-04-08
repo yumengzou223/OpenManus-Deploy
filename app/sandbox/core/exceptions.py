@@ -1,17 +1,1 @@
-"""Exception classes for the sandbox system.
-
-This module defines custom exceptions used throughout the sandbox system to
-handle various error conditions in a structured way.
-"""
-
-
-class SandboxError(Exception):
-    """Base exception for sandbox-related errors."""
-
-
-class SandboxTimeoutError(SandboxError):
-    """Exception raised when a sandbox operation times out."""
-
-
-class SandboxResourceError(SandboxError):
-    """Exception raised for resource-related errors."""
+IiIiRXhjZXB0aW9uIGNsYXNzZXMgZm9yIHRoZSBzYW5kYm94IHN5c3RlbS4KClRoaXMgbW9kdWxlIGRlZmluZXMgY3VzdG9tIGV4Y2VwdGlvbnMgdXNlZCB0aHJvdWdob3V0IHRoZSBzYW5kYm94IHN5c3RlbSB0bwpoYW5kbGUgdmFyaW91cyBlcnJvciBjb25kaXRpb25zIGluIGEgc3RydWN0dXJlZCB3YXkuCiIiIgoKCmNsYXNzIFNhbmRib3hFcnJvcihFeGNlcHRpb24pOgogICAgIiIiQmFzZSBleGNlcHRpb24gZm9yIHNhbmRib3gtcmVsYXRlZCBlcnJvcnMuIiIiCgoKY2xhc3MgU2FuZGJveFRpbWVvdXRFcnJvcihTYW5kYm94RXJyb3IpOgogICAgIiIiRXhjZXB0aW9uIHJhaXNlZCB3aGVuIGEgc2FuZGJveCBvcGVyYXRpb24gdGltZXMgb3V0LiIiIgoKCmNsYXNzIFNhbmRib3hSZXNvdXJjZUVycm9yKFNhbmRib3hFcnJvcik6CiAgICAiIiJFeGNlcHRpb24gcmFpc2VkIGZvciByZXNvdXJjZS1yZWxhdGVkIGVycm9ycy4iIiIK

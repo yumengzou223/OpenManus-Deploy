@@ -1,0 +1,20 @@
+2026-04-07 21:21:26.713 | WARNING  | __main__:main:25 - Processing your request...
+2026-04-07 21:21:26.713 | INFO     | app.agent.base:run:140 - Executing step 1/20
+2026-04-07 21:21:30.705 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2161, Completion=106, Cumulative Input=2161, Cumulative Completion=106, Total=2267, Cumulative Total=2267
+2026-04-07 21:21:30.706 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 我来帮您寻找粒子群算法的最新研究进展。粒子群优化算法（PSO）是一个活跃的研究领域，让我使用新闻和学术论文搜索工具来获取最新信息。
+2026-04-07 21:21:30.706 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:21:30.707 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-07 21:21:30.707 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "粒子群算法 最新研究进展 论文", "max_results": 8}
+2026-04-07 21:21:30.708 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-07 21:21:42.954 | INFO     | app.agent.toolcall:act:150 - 🎯 Tool 'news_scraper' completed its mission! Result: Observed output of cmd `news_scraper` executed:
+未找到「粒子群算法 最新研究进展 论文」相关的论文，请尝试其他关键词。
+
+💡 提示：arXiv API 可能因请求频繁暂时限制。您可以稍后重试，或尝试使用英文关键词（如 'particle swarm optimization'）。如果持续失败，建议在浏览器中直接访问 https://arxiv.org 搜索。
+2026-04-07 21:21:42.955 | INFO     | app.agent.base:run:140 - Executing step 2/20
+2026-04-07 21:21:46.762 | INFO     | app.llm:update_token_count:243 - Token usage: Input=2447, Completion=92, Cumulative Input=4608, Cumulative Completion=198, Total=2539, Cumulative Total=4806
+2026-04-07 21:21:46.762 | INFO     | app.agent.toolcall:think:81 - ✨ Manus's thoughts: 让我尝试使用英文关键词来搜索粒子群算法的最新研究论文，因为arXiv API对中文关键词可能支持不够好。
+2026-04-07 21:21:46.762 | INFO     | app.agent.toolcall:think:82 - 🛠️ Manus selected 1 tools to use
+2026-04-07 21:21:46.763 | INFO     | app.agent.toolcall:think:86 - 🧰 Tools being prepared: ['news_scraper']
+2026-04-07 21:21:46.763 | INFO     | app.agent.toolcall:think:89 - 🔧 Tool arguments: {"keyword": "particle swarm optimization recent research paper", "max_results": 8}
+2026-04-07 21:21:46.763 | INFO     | app.agent.toolcall:execute_tool:180 - 🔧 Activating tool: 'news_scraper'...
+2026-04-07 21:21:59.243 | INFO     | app.tool.mcp:disconnect:194 - Disconnected from all MCP servers

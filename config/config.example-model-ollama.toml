@@ -1,17 +1,1 @@
-# Global LLM configuration
-[llm] #OLLAMA:
-api_type = 'ollama'
-model = "llama3.2"                                                 # The LLM model to use
-base_url = "http://localhost:11434/v1"                             # API endpoint URL
-api_key = "ollama"                                                 # Your API key
-max_tokens = 4096                                                  # Maximum number of tokens in the response
-temperature = 0.0                                                  # Controls randomness
-
-
-[llm.vision] #OLLAMA VISION:
-api_type = 'ollama'
-model = "llama3.2-vision"                                          # The vision model to use
-base_url = "http://localhost:11434/v1"                             # API endpoint URL for vision model
-api_key = "ollama"                                                 # Your API key for vision model
-max_tokens = 4096                                                  # Maximum number of tokens in the response
-temperature = 0.0                                                  # Controls randomness for vision model
+IyBHbG9iYWwgTExNIGNvbmZpZ3VyYXRpb24KW2xsbV0gI09MTEFNQToKYXBpX3R5cGUgPSAnb2xsYW1hJwptb2RlbCA9ICJsbGFtYTMuMiIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBUaGUgTExNIG1vZGVsIHRvIHVzZQpiYXNlX3VybCA9ICJodHRwOi8vbG9jYWxob3N0OjExNDM0L3YxIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBBUEkgZW5kcG9pbnQgVVJMCmFwaV9rZXkgPSAib2xsYW1hIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFlvdXIgQVBJIGtleQptYXhfdG9rZW5zID0gNDA5NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBNYXhpbXVtIG51bWJlciBvZiB0b2tlbnMgaW4gdGhlIHJlc3BvbnNlCnRlbXBlcmF0dXJlID0gMC4wICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIENvbnRyb2xzIHJhbmRvbW5lc3MKCgpbbGxtLnZpc2lvbl0gI09MTEFNQSBWSVNJT046CmFwaV90eXBlID0gJ29sbGFtYScKbW9kZWwgPSAibGxhbWEzLjItdmlzaW9uIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgVGhlIHZpc2lvbiBtb2RlbCB0byB1c2UKYmFzZV91cmwgPSAiaHR0cDovL2xvY2FsaG9zdDoxMTQzNC92MSIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgQVBJIGVuZHBvaW50IFVSTCBmb3IgdmlzaW9uIG1vZGVsCmFwaV9rZXkgPSAib2xsYW1hIiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIFlvdXIgQVBJIGtleSBmb3IgdmlzaW9uIG1vZGVsCm1heF90b2tlbnMgPSA0MDk2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIE1heGltdW0gbnVtYmVyIG9mIHRva2VucyBpbiB0aGUgcmVzcG9uc2UKdGVtcGVyYXR1cmUgPSAwLjAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgQ29udHJvbHMgcmFuZG9tbmVzcyBmb3IgdmlzaW9uIG1vZGVsCg==

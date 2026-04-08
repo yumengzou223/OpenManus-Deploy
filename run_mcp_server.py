@@ -1,11 +1,1 @@
-# coding: utf-8
-# A shortcut to launch OpenManus MCP server, where its introduction also solves other import issues.
-from app.mcp.server import MCPServer, parse_args
-
-
-if __name__ == "__main__":
-    args = parse_args()
-
-    # Create and run server (maintaining original flow)
-    server = MCPServer()
-    server.run(transport=args.transport)
+IyBjb2Rpbmc6IHV0Zi04CiMgQSBzaG9ydGN1dCB0byBsYXVuY2ggT3Blbk1hbnVzIE1DUCBzZXJ2ZXIsIHdoZXJlIGl0cyBpbnRyb2R1Y3Rpb24gYWxzbyBzb2x2ZXMgb3RoZXIgaW1wb3J0IGlzc3Vlcy4KZnJvbSBhcHAubWNwLnNlcnZlciBpbXBvcnQgTUNQU2VydmVyLCBwYXJzZV9hcmdzCgoKaWYgX19uYW1lX18gPT0gIl9fbWFpbl9fIjoKICAgIGFyZ3MgPSBwYXJzZV9hcmdzKCkKCiAgICAjIENyZWF0ZSBhbmQgcnVuIHNlcnZlciAobWFpbnRhaW5pbmcgb3JpZ2luYWwgZmxvdykKICAgIHNlcnZlciA9IE1DUFNlcnZlcigpCiAgICBzZXJ2ZXIucnVuKHRyYW5zcG9ydD1hcmdzLnRyYW5zcG9ydCkK
