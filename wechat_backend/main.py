@@ -34,13 +34,35 @@ ALLOWED_CATEGORIES = {
 
 
 def is_relevant(title: str, abstract: str, search_keyword: str = "") -> bool:
-    """判断论文是否相关 - 宽松策略：只要求论文在 CS/AI 相关分类，不强制要求 RAG 关键词"""
-    text = (title + " " + abstract).lower()
-    # 如果搜索词本身包含 RAG 相关的，才做 RAG 强过滤
-    if any(rag_term in search_keyword.lower() for rag_term in ["rag", "retrieval augmented", "llm", "large language"]):
+    """判断论文是否相关：标题或摘要必须包含搜索关键词的核心词（忽略停用词）"""
+    title_lower = title.lower()
+    abstract_lower = abstract.lower()
+    text = title_lower + " " + abstract_lower
+
+    # RAG 相关搜索：使用强相关词过滤
+    if any(rag_term in search_keyword.lower() for rag_term in ["rag", "retrieval augment", "llm", "large language"]):
         return any(term.lower() in text for term in STRONG_TERMS)
-    # 其他搜索，只做分类过滤（更宽松）
-    return True
+
+    # 非 RAG 搜索：提取搜索词的关键词（去掉停用词）
+    stop_words = {"in", "of", "the", "a", "an", "for", "with", "and", "or", "to", "from",
+                   "on", "by", "is", "are", "was", "were", "be", "been", "being",
+                   "近三年", "近两年", "近一年", "的", "在", "研究", "应用", "领域", "最新", "近年来"}
+    key_terms = [w.strip() for w in search_keyword.split()
+                 if w.strip().lower() not in stop_words and len(w.strip()) > 1]
+
+    if not key_terms:
+        return True
+
+    # 至少一个关键词出现在标题中，或多个出现在摘要中
+    title_hits = sum(1 for term in key_terms if term.lower() in title_lower)
+    abstract_hits = sum(1 for term in key_terms if term.lower() in abstract_lower)
+
+    # 严格：标题至少命中1个，或摘要命中3个以上
+    if title_hits >= 1:
+        return True
+    if abstract_hits >= 3:
+        return True
+    return False
 
 
 def parse_entry(entry, ns):
