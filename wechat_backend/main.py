@@ -259,18 +259,25 @@ def chat_search():
     max_results = min(int(decision.get("max_results", 8)), 20)
     explanation = decision.get("explanation", "")
 
-    # 执行搜索
+    # 执行搜索（最多尝试3次，逐步放宽条件）
     papers = []
-    try:
-        import asyncio
-        papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter))
-    except Exception as e:
-        return jsonify({
-            "error": f"Search failed: {str(e)}",
-            "user_message": user_message,
-            "keyword": search_keyword,
-            "explanation": explanation,
-        }), 500
+    import asyncio
+
+    # 第1次：原计划搜索
+    papers = asyncio.run(search_arxiv(search_keyword, max_results, year_filter))
+
+    # 第2次：如果结果少于3篇，去掉年份过滤
+    if len(papers) < 3 and year_filter:
+        papers = asyncio.run(search_arxiv(search_keyword, max_results, None))
+
+    # 第3次：如果还是没结果，换更宽泛的关键词
+    if len(papers) < 3:
+        broad_keyword = "RAG " + " ".join(search_keyword.split()[-2:])
+        papers = asyncio.run(search_arxiv(broad_keyword, max_results, year_filter))
+
+    # 第4次：最后尝试只搜 RAG
+    if len(papers) < 3:
+        papers = asyncio.run(search_arxiv("RAG retrieval augmented generation", max_results, year_filter))
 
     return jsonify({
         "total": len(papers),
