@@ -51,9 +51,7 @@ def parse_entry(entry, ns):
         category = entry.find("atom:category", ns)
         cat_str = category.get("term", "") if category is not None else ""
 
-        if cat_str not in ALLOWED_CATEGORIES:
-            if not is_relevant(title, summary):
-                return None
+        # parse_entry 只解析数据，不过滤。过滤在 search_arxiv 的循环里做。
 
         authors = [
             a.findtext("atom:name", "", ns)
@@ -88,13 +86,11 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None, 
     all_entries = []
     seen_ids = set()
 
-    queries = [
-        f'"{keyword}"',
-        keyword,
-        "RAG",
-        "retrieval-augmented-generation",
-        "Retrieval Augmented Generation",
-    ]
+    is_rag_search = any(rag_term in keyword.lower() for rag_term in ["rag", "retrieval augment", "llm", "large language"])
+    queries = [f'"{keyword}"', keyword]
+    # 只有 RAG 相关搜索才补充 RAG 短语查询
+    if is_rag_search:
+        queries += ["RAG", "retrieval-augmented-generation", "Retrieval Augmented Generation"]
     queries = list(dict.fromkeys(q for q in queries if q.strip()))
 
     for query in queries:
@@ -132,18 +128,32 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None, 
     papers = []
     for entry in all_entries:
         parsed = parse_entry(entry, ns)
-        if parsed and is_relevant(parsed["title"], parsed["summary"], search_keyword):
-            papers.append(parsed)
-            if len(papers) >= max_results:
-                break
+        if not parsed:
+            continue
 
+        # 分类过滤
+        if parsed["category"] not in ALLOWED_CATEGORIES:
+            continue
+
+        # 相关性过滤
+        if not is_relevant(parsed["title"], parsed["summary"], search_keyword):
+            continue
+
+        papers.append(parsed)
+        if len(papers) >= max_results:
+            break
+
+    # 结果不够时回退：去掉相关性过滤，只保留分类过滤
     if len(papers) < max_results:
         for entry in all_entries:
             parsed = parse_entry(entry, ns)
-            if parsed and parsed not in papers:
-                papers.append(parsed)
-                if len(papers) >= max_results:
-                    break
+            if not parsed or parsed in papers:
+                continue
+            if parsed["category"] not in ALLOWED_CATEGORIES:
+                continue
+            papers.append(parsed)
+            if len(papers) >= max_results:
+                break
 
     return papers
 
@@ -151,21 +161,25 @@ async def search_arxiv(keyword: str, max_results: int, year_filter: int = None, 
 async def llm_decide_search(user_message: str) -> dict:
     """调用 DeepSeek LLM 解析用户意图"""
 
-    system_prompt = """你是一个论文搜索助手。用户输入自然语言问题，你需要将其转化为精确的 arXiv 搜索查询。
+    system_prompt = """你是一个论文搜索助手。用户输入自然语言问题（包括中文、英文、混合），你需要将其转化为精确的 arXiv 英文搜索关键词。
 
-分析用户意图，输出 JSON 格式：
+输出 JSON 格式：
 {
-  "search_keyword": "转化的搜索关键词（英文，最重要）",
-  "year_filter": 最低发表年份（如2022），无限制则null,
+  "search_keyword": "英文搜索关键词（必须，能直接用于 arXiv API）",
+  "year_filter": 最低发表年份（如2023），无限制则null,
   "max_results": 返回论文数量（默认8）,
-  "explanation": "你做了什么搜索决策的简要说明（中文，1-2句）"
+  "explanation": "简要说明（中文1-2句）"
 }
 
 规则：
-- search_keyword 必须是英文，能直接用于 arXiv API 搜索
-- 如果用户提到具体领域（如医疗、法律、金融），关键词要包含
-- 如果用户说"近三年"、"近两年"，year_filter 用2023
-- 如果用户没指定数量，max_results 默认 8"""
+- search_keyword 必须是英文，中文必须翻译成英文
+- 如果用户说"粒子群优化" → "particle swarm optimization"
+- 如果用户说"近三年" → year_filter = 2023
+- 如果用户说"近两年" → year_filter = 2024
+- 如果用户说"近一年" → year_filter = 2025
+- 如果用户提到金融/医疗/法律等具体领域 → 翻译并保留
+- search_keyword 不要包含"近三年"等时间词，只做 year_filter
+- max_results 默认 8"""
 
     if not DEEPSEEK_API_KEY:
         return {
@@ -289,6 +303,52 @@ def chat_search():
         first_word = search_keyword.split()[0] if search_keyword else "machine learning"
         papers = asyncio.run(search_arxiv(first_word, max_results, year_filter, first_word))
 
+    # ========== LLM 自检：对每篇论文打分排序 ==========
+    if papers and DEEPSEEK_API_KEY:
+        scored = []
+        for p in papers:
+            score_prompt = f"""用户需求："{user_message}"
+论文标题：{p['title']}
+论文摘要：{p['summary'][:300]}
+
+请判断这篇论文是否符合用户需求，返回 JSON：
+{{"score": 0-10之间的整数, "reason": "1句话说明原因（中文）"}}
+
+评分标准：
+- 10分：完全符合，用户需求的研究方向
+- 7-9分：比较相关，方向接近
+- 4-6分：有相关性但不够精确
+- 1-3分：勉强相关
+- 0分：完全无关"""
+
+            try:
+                async with httpx.AsyncClient(timeout=15) as client:
+                    sc = await client.post(
+                        DEEPSEEK_API_URL,
+                        headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"},
+                        json={
+                            "model": "deepseek-chat",
+                            "messages": [{"role": "user", "content": score_prompt}],
+                            "temperature": 0.2,
+                        },
+                    )
+                    sc.raise_for_status()
+                    content = sc.json()["choices"][0]["message"]["content"]
+                    import re
+                    m = re.search(r'"score":\s*(\d+)', content)
+                    score = int(m.group(1)) if m else 5
+                    reason_match = re.search(r'"reason":\s*"([^"]+)"', content)
+                    reason = reason_match.group(1) if reason_match else ""
+            except Exception:
+                score = 5
+                reason = ""
+
+            scored.append({**p, "relevance_score": score, "relevance_reason": reason})
+
+        # 按分数降序排列
+        scored.sort(key=lambda x: x["relevance_score"], reverse=True)
+        papers = scored
+
     return jsonify({
         "total": len(papers),
         "papers": papers,
@@ -315,7 +375,7 @@ def search_papers():
     year_filter = body.get("year_filter")
 
     import asyncio
-    papers = asyncio.run(search_arxiv(keyword, max_results, year_filter))
+    papers = asyncio.run(search_arxiv(keyword, max_results, year_filter, keyword))
 
     return jsonify({
         "total": len(papers),
